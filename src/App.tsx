@@ -27,7 +27,7 @@ function App() {
             <img
               src="https://avatars.githubusercontent.com/u/233442869?v=4"
               alt="Furkan Özden"
-              className="w-32 h-32 rounded-full border-2 border-gray-800"
+              className="w-48 h-48 rounded-full border-2 border-gray-800"
             />
           </div>
 
