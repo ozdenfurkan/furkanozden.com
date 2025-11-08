@@ -4,15 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://furkanozden.com",
-"scripts": {
+  "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
-    // Yeni Predeploy Script'i: Build yap ve CNAME'i dist'e kopyala
     "predeploy": "npm run build && cp CNAME dist/CNAME",
-    // Deploy script'ini dist kullanacak şekilde düzelttik (Vite standardı)
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
