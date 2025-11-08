@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upper-Intermediate Kelime Kitabı</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Genel Stiller */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f4f8;
+            transition: background-color 0.5s ease;
+        }
+        .book-page {
+            font-family: 'Lora', serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            min-height: 1120px;
+            background-color: #ffffff;
+            color: #1f2937;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .header, .footer {
+            font-family: 'Montserrat', sans-serif;
+            border-color: #e5e7eb;
+        }
+        .word-entry {
+            margin-bottom: 1rem;
+            page-break-inside: avoid;
+        }
+        .word-entry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .headword-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .headword {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        .word-forms {
+            background-color: #fafafa;
+            border: 1px solid #e5e7eb;
+        }
+        .word-forms p {
+            margin-bottom: 0.25rem;
+        }
+        .word-forms span {
+            font-style: italic;
+            color: #374151;
+        }
+        .collocation-box {
+            background-color: #f8fafc;
+            border-left-width: 3px;
+        }
+        .explanation {
+            color: #1d4ed8;
+        }
+        .colors {
+            --color-1: #fb7185;
+            --color-2: #fdba74;
+            --color-3: #818cf8;
+            --color-4: #60a5fa;
+            --color-5: #4ade80;
+        }
+        .word-entry { border-left: 4px solid; }
+        .word-entry:nth-child(5n+1) { border-color: var(--color-1); }
+        .word-entry:nth-child(5n+2) { border-color: var(--color-2); }
+        .word-entry:nth-child(5n+3) { border-color: var(--color-3); }
+        .word-entry:nth-child(5n+4) { border-color: var(--color-4); }
+        .word-entry:nth-child(5n+5) { border-color: var(--color-5); }
+        
+        /* Gece Modu Stilleri */
+        .dark body { background-color: #121212; }
+        .dark .book-page { background-color: #1E1E1E; color: #f9fafb; }
+        .dark .header, .dark .footer, .dark .word-forms { border-color: #374151; }
+        .dark .word-forms { background-color: #2a2a2a; }
+        .dark .word-forms p, .dark .word-forms span { color: #d1d5db; }
+        .dark .headword span { color: #93c5fd; }
+        .dark .collocation-box { background-color: #2a2a2a; }
+        .dark .explanation { color: #93c5fd; }
+        .dark .word-entry:hover { box-shadow: 0 4px 10px rgba(255,255,255,0.05); }
+        .dark .search-bar { background-color: #2a2a2a; border-color: #374151; color: #f9fafb;}
+
+        /* Tema Değiştirici Stilleri */
+        .theme-switcher input { display: none; }
+        .theme-switcher label {
+            position: relative;
+            width: 80px;
+            height: 30px;
+            background: #e9e9e9;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            user-select: none;
+            transition: background-color 0.4s ease;
+        }
+        .dark .theme-switcher label {
+            background: #2a2a2a;
+        }
+        .theme-switcher .moving-circle {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 38px;
+            height: 26px;
+            background: #fff;
+            border-radius: 13px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        .dark .theme-switcher .moving-circle {
+             background: #4a4a4a;
+        }
+        .theme-switcher input:checked + label .moving-circle {
+            transform: translateX(38px);
+        }
+        .theme-switcher .text {
+            flex: 1;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.4s ease;
+            z-index: 10;
+        }
+        .theme-switcher .light-text {
+            color: #333;
+        }
+        .dark .theme-switcher .light-text {
+            color: #777;
+        }
+        .theme-switcher .dark-text {
+            color: #aaa;
+        }
+        .dark .theme-switcher .dark-text {
+            color: #fff;
+        }
+        .speak-btn {
+            cursor: pointer;
+            color: #1f2937; /* Light modda siyah */
+            transition: color 0.2s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 11px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .speak-btn:hover {
+            color: #60a5fa;
+            transform: scale(1.1);
+        }
+        .dark .speak-btn {
+            color: #f9fafb; /* Dark modda beyaz */
+        }
+        .dark .speak-btn:hover {
+            color: #93c5fd;
+        }
+        .speak-btn.loading {
+            color: #f59e0b;
+        }
+        .speak-btn.hidden {
+            display: none;
+        }
+
+        /* Arama Kutusu Placeholder Stili */
+        .search-bar::placeholder {
+            text-align: center;
+        }
+        .dark .search-bar::placeholder {
+            color: #9ca3af;
+        }
+        
+        /* Yazdırma Stilleri */
+        @media print {
+            .theme-switcher-container, .search-container, .speak-btn {
+                display: none;
+            }
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .dark body {
+                background-color: #121212 !important;
+            }
+            .dark .book-page {
+                background-color: #1E1E1E !important;
+                color: #f9fafb !important;
+            }
+            .dark .header, .dark .footer, .dark .word-forms { border-color: #374151 !important; }
+            .dark .word-forms { background-color: #2a2a2a !important; }
+            .dark .word-forms p, .dark .word-forms span { color: #d1d5db !important; }
+            .dark .headword span { color: #93c5fd !important; }
+            .dark .collocation-box { background-color: #2a2a2a !important; }
+            .dark .explanation { color: #93c5fd !important; }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 colors">
+    <div class="book-page mx-auto p-6 sm:p-10 rounded-lg">
+        <header class="text-center pb-6 border-b-2">
+            <h1 class="text-3xl sm:text-4xl font-bold">Upper-Intermediate Kelime Kitabı</h1>
+            <p class="text-base mt-2">Kelimeler ve Kullanım Örnekleri</p>
+        </header>
+
+        <div class="theme-switcher-container mt-4 flex justify-center">
+            <div class="theme-switcher">
+                <input type="checkbox" id="theme-toggle">
+                <label for="theme-toggle">
+                    <span class="moving-circle"></span>
+                    <span class="text light-text">light</span>
+                    <span class="text dark-text">dark</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="search-container my-4">
+            <input type="text" id="search-bar" placeholder="Kelime ara..." class="search-bar w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none transition">
+        </div>
+
+        <main id="word-list" class="mt-6">
+            <!-- Kelimeler buraya eklenecek -->
+        </main>
+
+        <footer class="text-center pt-6 mt-10 border-t text-xs text-gray-400">
+            <p><a href="http://prep.bilkent.edu.tr/data/wordlist/uppint_level_wordlist.pdf" target="_blank" class="text-blue-400 hover:underline">Bilkent upper-intermediate word list</a> dosyasından derlenmiştir</p>
+            <p class="mt-1">© <span id="current-year"></span> - furkanozden.com</p>
+        </footer>
+    </div>
+
+    <script>
+        const wordData = [
+            { headword: 'Abandon', translation: 'Terk etmek, Vazgeçmek', verb: 'abandon', noun: 'abandonment', adjective: 'abandoned', adverb: '', collocation: 'to be forced to abandon stg completely/entirely', collocation_tr: 'Bir şeyi tamamen terk etmeye zorlanmak' },
+            { headword: 'Absorb', translation: 'Emmek, Soğurmak', verb: 'absorb', noun: '', adjective: 'absorbent', adverb: '', collocation: 'to absorb quickly/rapidly', collocation_tr: 'Hızlıca/süratle emmek' },
+            { headword: 'Abuse', translation: 'İstismar etmek, Kötüye kullanmak', verb: 'abuse', noun: 'abuser, abuse', adjective: 'abusive', adverb: '', collocation: 'to be abused emotionally/physically/sexually/verbally', collocation_tr: 'Duygusal/fiziksel/cinsel/sözlü olarak istismar edilmek' },
+            { headword: 'Accelerate', translation: 'Hızlandırmak', verb: 'accelerate', noun: 'acceleration', adjective: '', adverb: '', collocation: 'quickly accelerate rapid acceleration', collocation_tr: 'Hızlıca hızlanmak, ani hızlanma' },
+            { headword: 'accomplish', translation: 'Başarmak', verb: 'accomplish', noun: 'accomplishment', adjective: 'accomplished', adverb: '', collocation: 'accomplish successfully /easily become accomplished', collocation_tr: 'Başarıyla/kolayca başarmak, başarılı olmak' },
+            { headword: 'Account', translation: 'Hesap, Sorumluluk', verb: '', noun: 'accountability, account', adjective: 'accountable', adverb: '', collocation: 'take sth into account, bank account, to be accountable for sth', collocation_tr: 'Bir şeyi hesaba katmak, banka hesabı, bir şeyden sorumlu olmak' },
+            { headword: 'Acquire', translation: 'Edinmek, Kazanmak', verb: 'acquire', noun: 'acquisition', adjective: '', adverb: '', collocation: 'to acquire knowledge/skills, language acquisition', collocation_tr: 'Bilgi/beceri edinmek, dil edinimi' },
+            { headword: 'activate', translation: 'Etkinleştirmek', verb: 'activate', noun: 'action', adjective: 'active', adverb: 'actively', collocation: 'effective/firm/strong action, become/keep active', collocation_tr: 'Etkili/kesin/güçlü eylem, aktif olmak/kalmak' },
+            { headword: 'Adapt', translation: 'Uyum sağlamak', verb: 'adapt', noun: 'adaptation, adaptability', adjective: 'adaptable', adverb: '', collocation: 'to adapt successfully/well, to be adaptable, highly/very adaptable', collocation_tr: 'Başarıyla/iyi uyum sağlamak, uyumlu olmak, oldukça/çok uyumlu olmak' },
+            { headword: 'Adequate / Inadequate', translation: 'Yeterli/Yetersiz', verb: '', noun: 'adequacy, inadequacy', adjective: 'adequate, inadequate', adverb: 'adequately, inadequately', collocation: 'adequacy of sth, to be/seem adequate for sth', collocation_tr: 'Bir şeyin yeterliliği, bir şey için yeterli olmak/görünmek' },
+            { headword: 'Admission', translation: 'Kabul, İtiraf', verb: 'admit', noun: 'admission', adjective: '', adverb: '', collocation: 'to admit doing sth, to admit that + sentence', collocation_tr: 'Bir şey yaptığını itiraf etmek, ...olduğunu itiraf etmek' },
+            { headword: 'Adopt (idea)', translation: 'Benimsemek (fikir)', verb: 'adopt', noun: 'adoption', adjective: 'adopted', adverb: '', collocation: 'to adopt a baby/child, to adopt a new approach', collocation_tr: 'Bir bebek/çocuk evlat edinmek, yeni bir yaklaşım benimsemek' },
+            { headword: 'adverse', translation: 'Olumsuz, Ters', verb: '', noun: '', adjective: 'adverse', adverb: 'adversely', collocation: 'adverse condition/impact, adversely affect sth', collocation_tr: 'Olumsuz durum/etki, bir şeyi olumsuz etkilemek' },
+            { headword: 'Affair', translation: 'Mesele, İlişki', verb: '', noun: 'affair, affairs', adjective: '', adverb: '', collocation: 'current affairs, to have an affair with sb', collocation_tr: 'Güncel olaylar, biriyle ilişki yaşamak' },
+            { headword: 'Aim', translation: 'Amaç, Hedef', verb: 'aim', noun: 'aim', adjective: 'aimless', adverb: 'aimlessly', collocation: 'to aim for/at sth, main/primary aim', collocation_tr: 'Bir şeyi hedeflemek, ana/temel amaç' },
+            { headword: 'Aircraft', translation: 'Uçak', verb: '', noun: 'aircraft', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Allocate', translation: 'Tahsis etmek', verb: 'allocate', noun: 'allocation', adjective: '', adverb: '', collocation: 'allocate something for/to something, allocate time/money', collocation_tr: 'Bir şeye/biri için bir şey tahsis etmek, zaman/para ayırmak' },
+            { headword: 'Amuse', translation: 'Eğlendirmek', verb: 'amuse', noun: 'amusement', adjective: 'amusing, amused', adverb: '', collocation: 'to be/look amused, amusement park', collocation_tr: 'Eğlenmiş görünmek, lunapark' },
+            { headword: 'Analyze', translation: 'Analiz etmek', verb: 'analyze', noun: 'analysis', adjective: '', adverb: '', collocation: 'to analyze carefully/in depth, detailed/thorough analysis', collocation_tr: 'Dikkatlice/derinlemesine analiz etmek, detaylı/kapsamlı analiz' },
+            { headword: 'Ancient', translation: 'Antik', verb: '', noun: '', adjective: 'ancient', adverb: '', collocation: 'to be/look ancient, extremely/very ancient', collocation_tr: 'Antik görünmek, son derece/çok eski' },
+            { headword: 'Anticipate', translation: 'Beklemek, Ummak', verb: 'anticipate', noun: 'anticipation', adjective: '', adverb: '', collocation: 'in anticipation of sth, to anticipate a problem', collocation_tr: 'Bir şey beklentisiyle, bir sorunu öngörmek' },
+            { headword: 'Anxiety', translation: 'Kaygı', verb: '', noun: 'anxiety', adjective: 'anxious', adverb: 'anxiously', collocation: 'anxiety about/at/over sth, to cause/suffer from anxiety', collocation_tr: 'Bir şey hakkında kaygı, kaygıya neden olmak/kaygı çekmek' },
+            { headword: 'Anyhow', translation: 'Her neyse', verb: '', noun: '', adjective: '', adverb: 'anyhow', collocation: '', collocation_tr: '' },
+            { headword: 'Apparent', translation: 'Açık, Belli', verb: '', noun: '', adjective: 'apparent', adverb: 'apparently', collocation: 'to be/become/seem apparent', collocation_tr: 'Açık/belli olmak/görünmek' },
+            { headword: 'Appeal to', translation: 'Cazip gelmek', verb: 'appeal', noun: 'appeal', adjective: '', adverb: '', collocation: 'to appeal to sb/sth, to have/lose appeal', collocation_tr: 'Birine/bir şeye çekici gelmek, cazibesi olmak/kaybetmek' },
+            { headword: 'appliance', translation: 'Cihaz', verb: '', noun: 'appliance', adjective: '', adverb: '', collocation: 'modern/electrical appliance', collocation_tr: 'Modern/elektrikli cihaz' },
+            { headword: 'applicant', translation: 'Aday, Başvuran', verb: 'apply', noun: 'applicant', adjective: '', adverb: '', collocation: 'potential applicant, job applicants', collocation_tr: 'Potansiyel aday, iş başvurusunda bulunanlar' },
+            { headword: 'Appreciate', translation: 'Takdir etmek', verb: 'appreciate', noun: 'appreciation', adjective: 'appreciative', adverb: 'appreciatively', collocation: 'to really/fully appreciate, deep/great/real appreciation', collocation_tr: 'Gerçekten/tamamen takdir etmek, derin/büyük/gerçek takdir' },
+            { headword: 'Approach', translation: 'Yaklaşım', verb: 'approach', noun: 'approach', adjective: 'approachable', adverb: '', collocation: 'approach a problem /task, the approach of something', collocation_tr: 'Bir soruna/göreve yaklaşmak, bir şeyin yaklaşması' },
+            { headword: 'Approximate', translation: 'Yaklaşık', verb: '', noun: '', adjective: 'approximate', adverb: 'approximately', collocation: 'approximate time of sth', collocation_tr: 'Bir şeyin yaklaşık zamanı' },
+            { headword: 'Arrow (symbol)', translation: 'Ok (sembol)', verb: '', noun: 'arrow', adjective: '', adverb: '', collocation: 'to follow the arrows', collocation_tr: 'Okları takip etmek' },
+            { headword: 'artifact', translation: 'Tarihi eser', verb: '', noun: 'artifact', adjective: '', adverb: '', collocation: 'cultural artifact, Egyptian artifacts', collocation_tr: 'Kültürel eser, Mısır eserleri' },
+            { headword: 'Aside', translation: 'Bir kenara', verb: '', noun: '', adjective: '', adverb: 'aside', collocation: 'aside from, to put sth aside', collocation_tr: '...den başka, bir şeyi bir kenara koymak' },
+            { headword: 'Aspect', translation: 'Yön, Açı', verb: '', noun: 'aspect', adjective: '', adverb: '', collocation: 'all aspects of sth, key/crucial aspects', collocation_tr: 'Bir şeyin tüm yönleri, kilit/önemli yönleri' },
+            { headword: 'Assist', translation: 'Yardım etmek', verb: 'assist', noun: 'assistance, assistant', adjective: '', adverb: '', collocation: 'to assist greatly/actively, a personal/shop assistant', collocation_tr: 'Büyük ölçüde/aktif olarak yardım etmek, kişisel/mağaza asistanı' },
+            { headword: 'Associate', translation: 'İlişkilendirmek', verb: 'associate', noun: 'associate, association', adjective: '', adverb: '', collocation: 'to be associated with stg, a business/political associate', collocation_tr: 'Bir şey ile ilişkili olmak, iş/siyasi ortak' },
+            { headword: 'Astonish', translation: 'Şaşırtmak', verb: 'astonish', noun: 'astonishment', adjective: 'astonished, astonishing', adverb: 'astonishingly', collocation: 'to be/look/seem astonished, really/truly astonishing', collocation_tr: 'Şaşırmış olmak/görünmek, gerçekten/hakikaten şaşırtıcı' },
+            { headword: 'Atom', translation: 'Atom', verb: '', noun: 'atom', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Attend', translation: 'Katılmak', verb: 'attend', noun: 'attendance', adjective: '', adverb: '', collocation: 'to attend regularly, to attend a concert/meeting', collocation_tr: 'Düzenli olarak katılmak, bir konsere/toplantıya katılmak' },
+            { headword: 'Available', translation: 'Mevcut', verb: '', noun: 'availability', adjective: 'available', adverb: '', collocation: 'to be/become available', collocation_tr: 'Mevcut/müsait olmak' },
+            { headword: 'Award', translation: 'Ödül', verb: 'award', noun: 'award', adjective: '', adverb: '', collocation: 'to receive/win award', collocation_tr: 'Ödül almak/kazanmak' },
+            { headword: 'Aware/Unaware', translation: 'Farkında/Farkında olmayan', verb: '', noun: 'awareness', adjective: 'aware, unaware', adverb: '', collocation: 'to be/become aware of sth', collocation_tr: 'Bir şeyin farkında olmak/farkına varmak' },
+            { headword: 'Background info', translation: 'Arka plan bilgisi', verb: '', noun: 'background info', adjective: '', adverb: '', collocation: 'general/cultural/economic background', collocation_tr: 'Genel/kültürel/ekonomik arka plan' },
+            { headword: 'Bad-tempered', translation: 'Huysuz', verb: '', noun: '', adjective: 'bad-tempered', adverb: '', collocation: 'to be/seem/sound bad-tempered', collocation_tr: 'Huysuz olmak/görünmek/duyulmak' },
+            { headword: 'Balance', translation: 'Denge', verb: 'balance', noun: 'balance', adjective: 'balanced', adverb: '', collocation: 'to be well balanced', collocation_tr: 'İyi dengelenmiş olmak' },
+            { headword: 'Bankrupt', translation: 'İflas', verb: '', noun: 'bankruptcy', adjective: 'bankrupt', adverb: '', collocation: 'to go/be/become bankrupt', collocation_tr: 'İflas etmek' },
+            { headword: 'Bare', translation: 'Çıplak, Boş', verb: '', noun: '', adjective: 'bare, barefoot', adverb: 'barely, barefoot', collocation: 'to be barefoot, to be barely alive', collocation_tr: 'Yalınayak olmak, zar zor hayatta olmak' },
+            { headword: 'Battle', translation: 'Savaş', verb: 'battle', noun: 'battle', adjective: '', adverb: '', collocation: 'to fight in a fierce battle, to win/lose a battle', collocation_tr: 'Şiddetli bir savaşta savaşmak, bir savaşı kazanmak/kaybetmek' },
+            { headword: 'beam', translation: 'Işın', verb: '', noun: 'beam', adjective: '', adverb: '', collocation: 'a laser beam', collocation_tr: 'Lazer ışını' },
+            { headword: 'Beg', translation: 'Yalvarmak', verb: 'beg', noun: 'beggar', adjective: '', adverb: '', collocation: 'to beg for sth, to beg sb (not) to do sth', collocation_tr: 'Bir şey için yalvarmak, birine bir şeyi yapması (yapmaması) için yalvarmak' },
+            { headword: 'Beyond', translation: 'Ötesinde', verb: '', noun: '', adjective: '', adverb: 'beyond', collocation: 'to be beyond sb\'s control', collocation_tr: 'Birinin kontrolü dışında olmak' },
+            { headword: 'Bias', translation: 'Ön yargı', verb: '', noun: 'bias', adjective: 'biased, unbiased', adverb: '', collocation: 'political/gender/racial bias, be biased against/towards sth', collocation_tr: 'Siyasi/cinsiyet/ırksal ön yargı, bir şeye karşı/yönelik ön yargılı olmak' },
+            { headword: 'biodiversity', translation: 'Biyoçeşitlilik', verb: '', noun: 'biodiversity', adjective: '', adverb: '', collocation: 'biodiversity conservation/loss, a threat to biodiversity', collocation_tr: 'Biyoçeşitlilik koruma/kaybı, biyoçeşitliliğe bir tehdit' },
+            { headword: 'Bitter', translation: 'Acı, Kırgın', verb: '', noun: 'bitterness', adjective: 'bitter', adverb: 'bitterly', collocation: 'to be/feel bitter about sth, bitterly disappointed', collocation_tr: 'Bir şey hakkında kırgın olmak/hissetmek, acı bir şekilde hayal kırıklığına uğramış' },
+            { headword: 'Boast', translation: 'Övünmek', verb: 'boast', noun: 'boast', adjective: '', adverb: '', collocation: 'to boast about/of sth, a proud/empty boast', collocation_tr: 'Bir şeyle övünmek, gururlu/boş bir övünme' },
+            { headword: 'Branch', translation: 'Dal, Şube', verb: '', noun: 'branch', adjective: '', adverb: '', collocation: 'branch of a tree, branch of a bank', collocation_tr: 'Ağaç dalı, banka şubesi' },
+            { headword: 'Brand', translation: 'Marka', verb: '', noun: 'brand', adjective: '', adverb: '', collocation: 'a leading/top/famous brand', collocation_tr: 'Önde gelen/en iyi/ünlü bir marka' },
+            { headword: 'Brick', translation: 'Tuğla', verb: '', noun: 'brick', adjective: '', adverb: '', collocation: 'a brick wall/building', collocation_tr: 'Tuğla duvar/bina' },
+            { headword: 'Burn', translation: 'Yanmak', verb: 'burn', noun: 'burn', adjective: 'burning', adverb: '', collocation: 'to burn to death, a nasty/severe burn', collocation_tr: 'Yanarak ölmek, kötü/ciddi bir yanık' },
+            { headword: 'Bury', translation: 'Gömmek', verb: 'bury', noun: 'burial', adjective: '', adverb: '', collocation: 'to bury sb alive, buried treasure', collocation_tr: 'Birini canlı gömmek, gömülü hazine' },
+            { headword: 'Buyer and seller', translation: 'Alıcı ve satıcı', verb: '', noun: 'buyer, seller', adjective: '', adverb: '', collocation: 'a potential/prospective buyer', collocation_tr: 'Potansiyel/muhtemel bir alıcı' },
+            { headword: 'Cabinet', translation: 'Kabin, Dolap', verb: '', noun: 'cabinet', adjective: '', adverb: '', collocation: 'cabinet member/minister', collocation_tr: 'Kabine üyesi/bakan' },
+            { headword: 'Campaign', translation: 'Kampanya', verb: 'campaign', noun: 'campaign, campaigner', adjective: '', adverb: '', collocation: 'to campaign for/against sth, an effective/successful campaigner', collocation_tr: 'Bir şey için/karşı kampanya yapmak, etkili/başarılı bir kampanyacı' },
+            { headword: 'Cancer', translation: 'Kanser', verb: '', noun: 'cancer', adjective: '', adverb: '', collocation: 'breast/lung/skin cancer, to die from/of cancer', collocation_tr: 'Meme/akciğer/cilt kanseri, kanserden ölmek' },
+            { headword: 'Candidate', translation: 'Aday', verb: '', noun: 'candidate', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Capable', translation: 'Yetenekli', verb: '', noun: 'capability, incapability', adjective: 'capable, incapable', adverb: '', collocation: 'be capable/incapable of (doing) something, a very capable lawyer', collocation_tr: 'Bir şeyi yapabilme/yapamama, çok yetenekli bir avukat' },
+            { headword: 'Capacity', translation: 'Kapasite', verb: '', noun: 'capacity', adjective: '', adverb: '', collocation: 'to have/increase capacity', collocation_tr: 'Kapasiteye sahip olmak/artırmak' },
+            { headword: 'Cape', translation: 'Pelerin', verb: '', noun: 'cape', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Cardboard', translation: 'Karton', verb: '', noun: 'cardboard', adjective: '', adverb: '', collocation: 'cardboard box', collocation_tr: 'Karton kutu' },
+            { headword: 'cast', translation: 'Oyuncu kadrosu', verb: '', noun: 'cast', adjective: '', adverb: '', collocation: 'supporting cast', collocation_tr: 'Yardımcı oyuncu kadrosu' },
+            { headword: 'casual', translation: 'Gündelik', verb: '', noun: '', adjective: 'casual', adverb: 'casually', collocation: 'casual clothes, a casual manner', collocation_tr: 'Gündelik kıyafetler, rahat bir tavır' },
+            { headword: 'Cattle', translation: 'Büyükbaş hayvan', verb: '', noun: 'cattle', adjective: '', adverb: '', collocation: 'cattle farm', collocation_tr: 'Sığır çiftliği' },
+            { headword: 'Caution', translation: 'Tedbir', verb: '', noun: 'caution', adjective: 'cautious', adverb: 'cautiously', collocation: 'great caution, to be/become cautious', collocation_tr: 'Büyük tedbir, dikkatli olmak/haline gelmek' },
+            { headword: 'Celebrate', translation: 'Kutlamak', verb: 'celebrate', noun: 'celebration, celebrity', adjective: '', adverb: '', collocation: 'a big/special celebration', collocation_tr: 'Büyük/özel bir kutlama' },
+            { headword: 'censor', translation: 'Sansürlemek', verb: 'censor', noun: 'censorship', adjective: '', adverb: '', collocation: 'censorship of the press, impose/abolish censorship', collocation_tr: 'Basın sansürü, sansür uygulamak/kaldırmak' },
+            { headword: 'Chain', translation: 'Zincir', verb: 'chain', noun: 'chain', adjective: '', adverb: '', collocation: 'a chain reaction', collocation_tr: 'Zincirleme reaksiyon' },
+            { headword: 'Charm', translation: 'Cazibe', verb: 'charm', noun: 'charm', adjective: 'charming', adverb: 'charmingly', collocation: 'great/natural charm, to be extremely charming', collocation_tr: 'Büyük/doğal cazibe, son derece çekici olmak' },
+            { headword: 'Chase', translation: 'Kovalamak', verb: 'chase', noun: 'chase', adjective: '', adverb: '', collocation: 'car/police chase, to chase after', collocation_tr: 'Araba/polis kovalamacası, peşinden kovalamak' },
+            { headword: 'Chemical', translation: 'Kimyasal', verb: '', noun: 'chemical, chemistry, chemist', adjective: 'chemical', adverb: '', collocation: 'to be exposed to chemicals', collocation_tr: 'Kimyasallara maruz kalmak' },
+            { headword: 'Chest', translation: 'Göğüs, Sandık', verb: '', noun: 'chest', adjective: '', adverb: '', collocation: 'chest of drawers, treasure chest', collocation_tr: 'Çekmeceli dolap, hazine sandığı' },
+            { headword: 'Chimney', translation: 'Baca', verb: '', noun: 'chimney', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'chunk', translation: 'Parça', verb: '', noun: 'chunk', adjective: '', adverb: '', collocation: 'a chunk of text, a substantial chunk of profit', collocation_tr: 'Bir metin parçası, kârın önemli bir bölümü' },
+            { headword: 'Circumstance', translation: 'Durum, Koşul', verb: '', noun: 'circumstance', adjective: '', adverb: '', collocation: 'favourable/difficult/unforeseen circumstances', collocation_tr: 'Elverişli/zor/öngörülemeyen durumlar' },
+            { headword: 'Citizen', translation: 'Vatandaş', verb: '', noun: 'citizen, citizenship', adjective: '', adverb: '', collocation: 'good/responsible citizen, full/dual citizenship', collocation_tr: 'İyi/sorumlu vatandaş, tam/çifte vatandaşlık' },
+            { headword: 'Claim', translation: 'İddia etmek', verb: 'claim', noun: 'claim', adjective: '', adverb: '', collocation: 'to falsely/rightly claim, to make a claim', collocation_tr: 'Yanlış/haklı olarak iddia etmek, bir iddiada bulunmak' },
+            { headword: 'Clarify', translation: 'Açıklığa kavuşturmak', verb: 'clarify', noun: 'clarification', adjective: '', adverb: '', collocation: 'to fully clarify, clarification of sth', collocation_tr: 'Tamamen açıklığa kavuşturmak, bir şeyin açıklığa kavuşturulması' },
+            { headword: 'Classify', translation: 'Sınıflandırmak', verb: 'classify', noun: 'classification', adjective: 'classified', adverb: '', collocation: 'to classify by/according to sth, classified material/information', collocation_tr: 'Bir şeye göre sınıflandırmak, gizli materyal/bilgi' },
+            { headword: 'Client', translation: 'Müşteri, Müvekkil', verb: '', noun: 'client', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Close', translation: 'Yakın, Kapatmak', verb: 'close', noun: 'close', adjective: 'close', adverb: 'closely', collocation: 'closely related, listen closely', collocation_tr: 'Yakından ilişkili, dikkatle dinlemek' },
+            { headword: 'Coherent/Incoherent', translation: 'Tutarlı/Tutarsız', verb: '', noun: 'coherence, incoherence', adjective: 'coherent, incoherent', adverb: '', collocation: 'to have/lack coherence, to be coherent', collocation_tr: 'Tutarlılığa sahip olmak/olmamak, tutarlı olmak' },
+            { headword: 'coincidence', translation: 'Tesadüf', verb: '', noun: 'coincidence', adjective: '', adverb: '', collocation: 'a series of strange/amazing coincidences, by coincidence', collocation_tr: 'Bir dizi garip/şaşırtıcı tesadüf, tesadüfen' },
+            { headword: 'collective', translation: 'Toplu, Kolektif', verb: 'collect', noun: 'collection', adjective: 'collective', adverb: '', collocation: 'a collective decision', collocation_tr: 'Toplu bir karar' },
+            { headword: 'Column', translation: 'Sütun', verb: '', noun: 'column, columnist', adjective: '', adverb: '', collocation: 'newspaper/daily column', collocation_tr: 'Gazete/günlük köşe yazısı' },
+            { headword: 'Combine', translation: 'Birleştirmek', verb: 'combine', noun: 'combination', adjective: '', adverb: '', collocation: 'to combine successfully, in combination with sth', collocation_tr: 'Başarıyla birleştirmek, bir şeyle birlikte' },
+            { headword: 'come up with', translation: 'Fikir bulmak, Önermek', verb: 'come up with', noun: '', adjective: '', adverb: '', collocation: 'come up with a plan/ideas/an excuse', collocation_tr: 'Bir plan/fikir/bahane bulmak' },
+            { headword: 'Command', translation: 'Emir, Komuta', verb: 'command', noun: 'command, commander', adjective: '', adverb: '', collocation: 'to give command, to be in command', collocation_tr: 'Emir vermek, komutada olmak' },
+            { headword: 'Comment', translation: 'Yorum', verb: 'comment', noun: 'comment', adjective: '', adverb: '', collocation: 'to comment about/on sth, to have/make a comment', collocation_tr: 'Bir şey hakkında yorum yapmak, yorum yapmak' },
+            { headword: 'Commission', translation: 'Komisyon', verb: '', noun: 'commission', adjective: '', adverb: '', collocation: 'international/national commission, set up/establish a commission', collocation_tr: 'Uluslararası/ulusal komisyon, bir komisyon kurmak' },
+            { headword: 'Commit', translation: 'İşlemek (suç), Adamak', verb: 'commit', noun: 'commitment', adjective: 'committed', adverb: '', collocation: 'to commit suicide/a crime, to show/lack commitment', collocation_tr: 'İntihar etmek/suç işlemek, bağlılık göstermek/göstermemek' },
+            { headword: 'Companion', translation: 'Arkadaş, Yoldaş', verb: '', noun: 'companion, companionship', adjective: '', adverb: '', collocation: 'a good/entertaining/constant companion', collocation_tr: 'İyi/eğlenceli/sürekli bir arkadaş' },
+            { headword: 'Complex', translation: 'Karmaşık', verb: '', noun: 'complexity', adjective: 'complex', adverb: '', collocation: 'great/extreme complexity, to be extremely/highly complex', collocation_tr: 'Büyük/aşırı karmaşıklık, son derece/çok karmaşık olmak' },
+            { headword: 'Complicate', translation: 'Karmaşıklaştırmak', verb: 'complicate', noun: '', adjective: 'complicated', adverb: '', collocation: 'to be/look/seem complicated, very/highly/incredibly complicated', collocation_tr: 'Karmaşık olmak/görünmek, çok/oldukça/inanılmaz derecede karmaşık' },
+            { headword: 'Component', translation: 'Bileşen', verb: '', noun: 'component', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Composition', translation: 'Beste, Kompozisyon', verb: 'compose', noun: 'composition, composer', adjective: '', adverb: '', collocation: 'to compose music, a famous/leading/successful composer', collocation_tr: 'Müzik bestelemek, ünlü/önde gelen/başarılı bir besteci' },
+            { headword: 'Concentrate', translation: 'Odaklanmak', verb: 'concentrate', noun: 'concentration', adjective: 'concentrated', adverb: '', collocation: 'to fully concentrate on/upon sth, to lose concentration', collocation_tr: 'Bir şeye tamamen odaklanmak, konsantrasyonu kaybetmek' },
+            { headword: 'Concept', translation: 'Kavram', verb: '', noun: 'concept', adjective: '', adverb: '', collocation: 'to understand/grasp a concept, abstract concepts', collocation_tr: 'Bir kavramı anlamak, soyut kavramlar' },
+            { headword: 'Conclude', translation: 'Sonuçlandırmak', verb: 'conclude', noun: 'conclusion', adjective: '', adverb: '', collocation: 'come to a conclusion / in conclusion', collocation_tr: 'Bir sonuca varmak / sonuç olarak' },
+            { headword: 'Conduct', translation: 'Yürütmek, Davranış', verb: 'conduct', noun: '', adjective: '', adverb: '', collocation: 'to conduct survey/research', collocation_tr: 'Anket/araştırma yürütmek' },
+            { headword: 'Conference', translation: 'Konferans', verb: '', noun: 'conference', adjective: '', adverb: '', collocation: 'to attend/go to/organize a conference', collocation_tr: 'Bir konferansa katılmak/gitmek/organize etmek' },
+            { headword: 'Confess', translation: 'İtiraf etmek', verb: 'confess', noun: 'confession', adjective: '', adverb: '', collocation: 'to confess to sth, to confess freely/openly', collocation_tr: 'Bir şeyi itiraf etmek, serbestçe/açıkça itiraf etmek' },
+            { headword: 'Congratulate', translation: 'Tebrik etmek', verb: 'congratulate', noun: 'congratulations', adjective: '', adverb: '', collocation: 'to congratulate warmly, congratulations on/upon sth', collocation_tr: 'Sıcak bir şekilde tebrik etmek, bir şey için tebrikler' },
+            { headword: 'Conquer', translation: 'Fethetmek', verb: 'conquer', noun: 'conquest, conqueror', adjective: '', adverb: '', collocation: 'military conquest', collocation_tr: 'Askeri fetih' },
+            { headword: 'Conscious / unconscious', translation: 'Bilinçli/Bilinçsiz', verb: '', noun: 'consciousness', adjective: 'conscious, unconscious', adverb: 'consciously, unconsciously', collocation: 'to lose/regain consciousness, to be/seem/become conscious', collocation_tr: 'Bilincini kaybetmek/geri kazanmak, bilinçli olmak/görünmek' },
+            { headword: 'Consequence', translation: 'Sonuç', verb: '', noun: 'consequence', adjective: 'consequent', adverb: 'consequently', collocation: 'catastrophic/devastating/dangerous/severe consequences', collocation_tr: 'Feci/yıkıcı/tehlikeli/ciddi sonuçlar' },
+            { headword: 'conserve', translation: 'Korumak', verb: 'conserve', noun: 'conservation', adjective: '', adverb: '', collocation: 'conserve energy/strength, energy, environmental, forest conservation', collocation_tr: 'Enerji/güç korumak, enerji, çevre, orman koruma' },
+            { headword: 'Consist (of)', translation: 'Oluşmak', verb: 'consist', noun: '', adjective: '', adverb: '', collocation: 'to consist entirely/mainly/largely of sth', collocation_tr: 'Tamamen/çoğunlukla/büyük ölçüde bir şeyden oluşmak' },
+            { headword: 'Construct', translation: 'İnşa etmek', verb: 'construct', noun: 'construction', adjective: 'constructive', adverb: '', collocation: 'railway construction, constructive advice/criticism', collocation_tr: 'Demiryolu inşaatı, yapıcı tavsiye/eleştiri' },
+            { headword: 'Consume', translation: 'Tüketmek', verb: 'consume', noun: 'consumption, consumer, consumerism', adjective: '', adverb: '', collocation: 'to protect/satisfy consumer, high/low consumption', collocation_tr: 'Tüketiciyi korumak/memnun etmek, yüksek/düşük tüketim' },
+            { headword: 'Contemporary', translation: 'Çağdaş', verb: '', noun: '', adjective: 'contemporary', adverb: '', collocation: 'contemporary music', collocation_tr: 'Çağdaş müzik' },
+            { headword: 'Contrary', translation: 'Aksi, Ters', verb: '', noun: 'contrariness', adjective: 'contrary', adverb: 'contrarily', collocation: 'on the contrary', collocation_tr: 'Aksine, tam tersi' },
+            { headword: 'Convert', translation: 'Dönüştürmek', verb: 'convert', noun: 'conversion', adjective: '', adverb: '', collocation: 'to convert into sth, conversion chart', collocation_tr: 'Bir şeye dönüştürmek, dönüşüm tablosu' },
+            { headword: 'Cooperate', translation: 'İşbirliği yapmak', verb: 'cooperate', noun: 'cooperation', adjective: 'cooperative', adverb: 'cooperatively', collocation: 'to cooperate fully/closely, close/full cooperation', collocation_tr: 'Tamamen/yakından işbirliği yapmak, yakın/tam işbirliği' },
+            { headword: 'Cope (with)', translation: 'Başa çıkmak', verb: 'cope', noun: '', adjective: '', adverb: '', collocation: 'to cope well/easily, cope with', collocation_tr: 'İyi/kolayca başa çıkmak, ile başa çıkmak' },
+            { headword: 'Copper', translation: 'Bakır', verb: '', noun: 'copper', adjective: '', adverb: '', collocation: 'to mine/produce copper', collocation_tr: 'Bakır madeni/üretmek' },
+            { headword: 'Court', translation: 'Mahkeme', verb: '', noun: 'court', adjective: '', adverb: '', collocation: 'a court case, go to court, take somebody to court', collocation_tr: 'Bir mahkeme davası, mahkemeye gitmek, birini mahkemeye vermek' },
+            { headword: 'Corn', translation: 'Mısır', verb: '', noun: 'corn', adjective: '', adverb: '', collocation: 'ripe/green corn, to grow/harvest corn', collocation_tr: 'Olgun/yeşil mısır, mısır yetiştirmek/hasat etmek' },
+            { headword: 'Council', translation: 'Konsey, Meclis', verb: '', noun: 'council', adjective: '', adverb: '', collocation: 'council meeting/member', collocation_tr: 'Konsey toplantısı/üyesi' },
+            { headword: 'Counter (argument)', translation: 'Karşı (argüman)', verb: '', noun: 'counter-argument', adjective: '', adverb: '', collocation: 'a have counter-argument', collocation_tr: 'Bir karşı argümana sahip olmak' },
+            { headword: 'Coverage', translation: 'Kapsam, Yayın', verb: 'cover', noun: 'coverage', adjective: '', adverb: '', collocation: 'newspaper/press/media coverage', collocation_tr: 'Gazete/basın/medya kapsamı' },
+            { headword: 'Coward', translation: 'Korkak', verb: '', noun: 'coward, cowardice', adjective: 'cowardly', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Crash', translation: 'Çarpışma', verb: 'crash', noun: 'crash', adjective: '', adverb: '', collocation: 'to crash into sth, a serious/fatal crash', collocation_tr: 'Bir şeye çarpmak, ciddi/ölümcül bir kaza' },
+            { headword: 'Crisis', translation: 'Kriz', verb: '', noun: 'crisis', adjective: '', adverb: '', collocation: 'economic/financial/family crisis, mid-life crisis', collocation_tr: 'Ekonomik/finansal/aile krizi, orta yaş krizi' },
+            { headword: 'Crisp', translation: 'Gevrek, Çıtır', verb: '', noun: 'crisp', adjective: 'crisp, crispy', adverb: '', collocation: 'a packet of crisps, crisp apple/pastry', collocation_tr: 'Bir paket cips, gevrek elma/hamur işi' },
+            { headword: 'Criteria', translation: 'Kriterler', verb: '', noun: 'Criteria (pl), Criterion(sg)', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Critic', translation: 'Eleştirmen', verb: 'criticize', noun: 'criticism, critic', adjective: 'critical', adverb: 'critically', collocation: 'to criticize bitterly/severely, harsh/heavy criticism', collocation_tr: 'Acı/sert bir şekilde eleştirmek, sert/ağır eleştiri' },
+            { headword: 'Crucial', translation: 'Çok önemli', verb: '', noun: '', adjective: 'crucial', adverb: 'crucially', collocation: 'to prove/become crucial, crucial for/to', collocation_tr: 'Önemli olduğunu kanıtlamak/önemli hale gelmek, için/için çok önemli' },
+            { headword: 'Cruel', translation: 'Zalim', verb: '', noun: 'cruelty', adjective: 'cruel', adverb: '', collocation: 'to be/become cruel, extreme/great/animal cruelty', collocation_tr: 'Zalim olmak/haline gelmek, aşırı/büyük/hayvan zulmü' },
+            { headword: 'Currency', translation: 'Para birimi', verb: '', noun: 'currency', adjective: '', adverb: '', collocation: 'domestic/foreign currency, to change currency', collocation_tr: 'Yerli/yabancı para birimi, para birimini değiştirmek' },
+            { headword: 'Curve', translation: 'Eğri', verb: 'curve', noun: 'curve', adjective: '', adverb: '', collocation: 'a sharp/tight curve', collocation_tr: 'Keskin/sıkı bir viraj' },
+            { headword: 'Damp', translation: 'Nemli, Rutubetli', verb: '', noun: 'damp, dampness', adjective: 'damp', adverb: '', collocation: 'to be/smell/look damp', collocation_tr: 'Nemli olmak/kokmak/görünmek' },
+            { headword: 'Deal', translation: 'Anlaşma', verb: 'deal', noun: 'deal', adjective: '', adverb: '', collocation: 'to deal with sth, a business deal', collocation_tr: 'Bir şeyle ilgilenmek, bir iş anlaşması' },
+            { headword: 'Debate', translation: 'Tartışma', verb: '', noun: 'debate', adjective: 'debatable', adverb: '', collocation: 'debate about / on, have a debate', collocation_tr: 'Hakkında tartışma, tartışma yapmak' },
+            { headword: 'Debt', translation: 'Borç', verb: '', noun: 'debt, debtor', adjective: '', adverb: '', collocation: 'to have/owe debt, to go/get into debt', collocation_tr: 'Borcu olmak, borca girmek' },
+            { headword: 'Decay', translation: 'Çürüme', verb: 'decay', noun: 'decay', adjective: '', adverb: '', collocation: 'dental/tooth decay, signs of decay', collocation_tr: 'Diş çürümesi, çürüme belirtileri' },
+            { headword: 'Deceive', translation: 'Aldatmak', verb: 'deceive', noun: 'deception', adjective: 'deceptive', adverb: '', collocation: 'to deceive easily, very deceptive', collocation_tr: 'Kolayca aldatmak, çok aldatıcı' },
+            { headword: 'Decline', translation: 'Reddetmek, Azalmak', verb: 'decline', noun: 'decline', adjective: '', adverb: '', collocation: 'to decline politely, steep/steady/sharp decline in sth', collocation_tr: 'Kibarca reddetmek, bir şeyde dik/istikrarlı/keskin düşüş' },
+            { headword: 'degrade', translation: 'Aşağılamak, Bozmak', verb: 'degrade', noun: '', adjective: '', adverb: '', collocation: 'degrade into something, degrade air/water quality', collocation_tr: 'Bir şeye dönüşmek, hava/su kalitesini bozmak' },
+            { headword: 'Delay', translation: 'Gecikme', verb: 'delay', noun: 'delay', adjective: '', adverb: '', collocation: 'to cause/lead to delay, long delay', collocation_tr: 'Gecikmeye neden olmak, uzun gecikme' },
+            { headword: 'Deliberate', translation: 'Kasıtlı', verb: '', noun: '', adjective: 'deliberate', adverb: 'deliberately', collocation: 'a deliberate attempt', collocation_tr: 'Kasıtlı bir girişim' },
+            { headword: 'Delight', translation: 'Zevk, Memnuniyet', verb: '', noun: 'delight', adjective: 'delightful, delighted', adverb: '', collocation: 'to be/seem delightful, to be/feel/look delighted at sth', collocation_tr: 'Keyifli olmak/görünmek, bir şeye sevinmek/memnun olmak' },
+            { headword: 'democracy', translation: 'Demokrasi', verb: '', noun: 'democracy', adjective: 'democratic', adverb: '', collocation: 'western democracy, believe in democracy', collocation_tr: 'Batı demokrasisi, demokrasiye inanmak' },
+            { headword: 'Demonstrate', translation: 'Göstermek', verb: 'demonstrate', noun: 'demonstration, demonstrator', adjective: '', adverb: '', collocation: 'to clearly demonstrate to sb, to peacefully demonstrate against/for sth', collocation_tr: 'Birine açıkça göstermek, bir şeye karşı/için barışçıl bir şekilde gösteri yapmak' },
+            { headword: 'dense', translation: 'Yoğun', verb: '', noun: 'density', adjective: 'dense', adverb: '', collocation: 'dense forest, high/low density', collocation_tr: 'Sık orman, yüksek/düşük yoğunluk' },
+            { headword: 'Deny', translation: 'İnkar etmek', verb: 'deny', noun: 'denial', adjective: '', adverb: '', collocation: 'to deny firmly/strongly/consistently, firm/strong denial', collocation_tr: 'Kesin/güçlü/tutarlı bir şekilde inkar etmek, kesin/güçlü inkar' },
+            { headword: 'Deposit', translation: 'Depozito', verb: '', noun: 'deposit', adjective: '', adverb: '', collocation: 'give/leave/pay a deposit', collocation_tr: 'Depozito vermek/bırakmak/ödemek' },
+            { headword: 'Descend', translation: 'İnmek', verb: 'descend', noun: 'descendant', adjective: '', adverb: '', collocation: 'to descend from sb/sth', collocation_tr: 'Birinden/bir şeyden gelmek (soy)' },
+            { headword: 'Desire', translation: 'Arzu', verb: 'desire', noun: 'desire', adjective: 'desirable, desired', adverb: '', collocation: 'to greatly desire sth, a burning/strong desire', collocation_tr: 'Bir şeyi çok arzulamak, yakıcı/güçlü bir arzu' },
+            { headword: 'Desperate', translation: 'Umutsuz', verb: '', noun: 'desperation', adjective: 'desperate', adverb: 'desperately', collocation: 'to be/look/feel desperate', collocation_tr: 'Umutsuz olmak/görünmek/hissetmek' },
+            { headword: 'Detect', translation: 'Tespit etmek', verb: 'detect', noun: 'detection, detective', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Diet', translation: 'Diyet', verb: 'diet', noun: 'diet', adjective: '', adverb: '', collocation: 'a balanced/good/healthy diet, to follow/go on a diet', collocation_tr: 'Dengeli/iyi/sağlıklı bir diyet, diyete girmek' },
+            { headword: 'Differ', translation: 'Farklı olmak', verb: 'differ, differentiate', noun: 'difference', adjective: 'different, distinguishable', adverb: 'differently', collocation: 'to differ considerably/enormously/greatly, to differ from sth', collocation_tr: 'Önemli ölçüde/muazzam/büyük ölçüde farklı olmak, bir şeyden farklı olmak' },
+            { headword: 'Dilemma', translation: 'İkilem', verb: '', noun: 'dilemma', adjective: '', adverb: '', collocation: 'be in a dilemma, face a dilemma, resolve a dilemma', collocation_tr: 'Bir ikilemde olmak, bir ikilemle yüzleşmek, bir ikilemi çözmek' },
+            { headword: 'Dimension', translation: 'Boyut', verb: '', noun: 'dimension', adjective: '', adverb: '', collocation: 'to add a new dimension to sth, essential/important dimension', collocation_tr: 'Bir şeye yeni bir boyut katmak, temel/önemli boyut' },
+            { headword: 'Dip (into)', translation: 'Daldırmak', verb: 'dip', noun: '', adjective: '', adverb: '', collocation: 'to dip into now and then', collocation_tr: 'Arada bir göz atmak' },
+            { headword: 'Disadvantage', translation: 'Dezavantaj', verb: '', noun: 'disadvantage', adjective: 'disadvantageous, disadvantaged', adverb: '', collocation: 'have the/an advantage, be at a disadvantage', collocation_tr: 'Avantajı olmak, dezavantajlı durumda olmak' },
+            { headword: 'Discipline', translation: 'Disiplin', verb: '', noun: 'discipline', adjective: 'disciplined', adverb: '', collocation: 'to impose/enforce discipline, strong/harsh discipline', collocation_tr: 'Disiplin uygulamak/sağlamak, güçlü/sert disiplin' },
+            { headword: 'Discomfort', translation: 'Rahatsızlık', verb: '', noun: 'discomfort', adjective: '', adverb: '', collocation: 'to have/suffer/experience discomfort, great/severe discomfort', collocation_tr: 'Rahatsızlık duymak/çekmek/yaşamak, büyük/şiddetli rahatsızlık' },
+            { headword: 'disorder', translation: 'Bozukluk', verb: '', noun: 'disorder', adjective: '', adverb: '', collocation: 'mental/ a blood disorder', collocation_tr: 'Zihinsel/kan bozukluğu' },
+            { headword: 'Dissatisfy / Satisfy', translation: 'Memnuniyetsiz/Memnun', verb: 'dissatisfy, satisfy', noun: 'dissatisfaction, satisfaction', adjective: 'dissatisfied, satisfied', adverb: '', collocation: 'deep/increasing/public dissatisfaction, to be/feel satisfied with sth', collocation_tr: 'Derin/artan/halkın memnuniyetsizliği, bir şeyden memnun olmak/hissetmek' },
+            { headword: 'Distinguish', translation: 'Ayırt etmek', verb: 'distinguish', noun: '', adjective: 'distinguished', adverb: '', collocation: 'to distinguish clearly/easily, a distinguished writer', collocation_tr: 'Açıkça/kolayca ayırt etmek, seçkin bir yazar' },
+            { headword: 'Distribute', translation: 'Dağıtmak', verb: 'distribute', noun: 'distribution', adjective: '', adverb: '', collocation: 'to distribute fairly/equally, equal/regional distribution', collocation_tr: 'Adil/eşit bir şekilde dağıtmak, eşit/bölgesel dağılım' },
+            { headword: 'Disturb', translation: 'Rahatsız etmek', verb: 'disturb', noun: 'disturbance', adjective: 'disturbing, disturbed', adverb: '', collocation: 'serious/major/considerable disturbance, to be/become disturbing', collocation_tr: 'Ciddi/büyük/önemli rahatsızlık, rahatsız edici olmak/haline gelmek' },
+            { headword: 'Diverse', translation: 'Çeşitli, Farklı', verb: '', noun: 'diversity', adjective: 'diverse', adverb: '', collocation: 'great/wide/immense diversity, ethnic diversity', collocation_tr: 'Büyük/geniş/muazzam çeşitlilik, etnik çeşitlilik' },
+            { headword: 'Domestic', translation: 'Evcil, Yerli', verb: 'domesticate', noun: '', adjective: 'domestic, domesticated', adverb: '', collocation: 'domestic market/ economy/pets', collocation_tr: 'İç pazar/ekonomi/evcil hayvanlar' },
+            { headword: 'donate', translation: 'Bağış yapmak', verb: 'donate', noun: 'donation', adjective: '', adverb: '', collocation: 'donate something to charity, make a donation', collocation_tr: 'Hayır kurumuna bir şey bağışlamak, bağış yapmak' },
+            { headword: 'dose-dosage', translation: 'Doz-dozaj', verb: '', noun: 'dose-dosage', adjective: '', adverb: '', collocation: 'recommended dosage', collocation_tr: 'Önerilen dozaj' },
+            { headword: 'Dot (punctuation)', translation: 'Nokta', verb: '', noun: 'dot', adjective: '', adverb: '', collocation: 'a pattern of dots', collocation_tr: 'Nokta deseni' },
+            { headword: 'Dozen', translation: 'Düzine', verb: '', noun: 'dozen', adjective: '', adverb: '', collocation: 'dozens of sth', collocation_tr: 'Onlarca bir şey' },
+            { headword: 'draught', translation: 'Kuraklık', verb: '', noun: 'draught', adjective: '', adverb: '', collocation: 'a severe draught', collocation_tr: 'Şiddetli kuraklık' },
+            { headword: 'drawback', translation: 'Dezavantaj, Sakınca', verb: '', noun: '', adjective: '', adverb: '', collocation: 'main/major/real/serious drawbacks, minor/slight drawbacks', collocation_tr: 'Ana/büyük/gerçek/ciddi dezavantajlar, küçük/hafif dezavantajlar' },
+            { headword: 'Drug', translation: 'İlaç, Uyuşturucu', verb: '', noun: 'drug', adjective: '', adverb: '', collocation: 'to be on/take drugs, illegal/dangerous drugs', collocation_tr: 'Uyuşturucu kullanmak, yasadışı/tehlikeli uyuşturucular' },
+            { headword: 'Dull', translation: 'Sıkıcı', verb: '', noun: '', adjective: 'dull', adverb: '', collocation: 'a dull place/person, extremely/disappointingly dull', collocation_tr: 'Sıkıcı bir yer/kişi, son derece/hayal kırıklığı yaratacak şekilde sıkıcı' },
+            { headword: 'Duty', translation: 'Görev', verb: '', noun: 'duty', adjective: '', adverb: '', collocation: 'to be on/off duty, to have a duty', collocation_tr: 'Görevde olmak/olmamak, bir görevi olmak' },
+            { headword: 'Dynamic', translation: 'Dinamik', verb: '', noun: 'dynamism', adjective: 'dynamic', adverb: '', collocation: 'a dynamic teacher/leader', collocation_tr: 'Dinamik bir öğretmen/lider' },
+            { headword: 'Economic', translation: 'Ekonomik', verb: '', noun: 'economy', adjective: 'economic, economical', adverb: 'economically', collocation: 'economic growth/policy, strong/weak economy', collocation_tr: 'Ekonomik büyüme/politika, güçlü/zayıf ekonomi' },
+            { headword: 'Edition', translation: 'Baskı, Sürüm', verb: '', noun: 'edition, editor', adjective: '', adverb: '', collocation: 'latest/first/limited edition', collocation_tr: 'En son/ilk/sınırlı baskı' },
+            { headword: 'Effort', translation: 'Çaba', verb: '', noun: 'effort', adjective: 'effortless', adverb: '', collocation: 'to make an effort to do sth, physical/mental/intellectual effort', collocation_tr: 'Bir şeyi yapmak için çaba göstermek, fiziksel/zihinsel/entelektüel çaba' },
+            { headword: 'Elect', translation: 'Seçmek', verb: 'elect', noun: 'election', adjective: '', adverb: '', collocation: 'to elect annually/democratically/freely, fair/democratic election', collocation_tr: 'Yıllık/demokratik/özgür bir şekilde seçmek, adil/demokratik seçim' },
+            { headword: 'Elsewhere', translation: 'Başka yerde', verb: '', noun: '', adjective: '', adverb: 'elsewhere', collocation: '', collocation_tr: '' },
+            { headword: 'Embarrass', translation: 'Utandırmak', verb: 'embarrass', noun: 'embarrassment', adjective: 'embarrassing, embarrassed', adverb: '', collocation: 'severe/total/slight embarrassment, to be/feel/look embarrassed about sth', collocation_tr: 'Şiddetli/tam/hafif utanç, bir şeyden utanmak/mahcup hissetmek' },
+            { headword: 'Employ', translation: 'İstihdam etmek', verb: 'employ', noun: 'employer, employee, employment, unemployment', adjective: 'employed, unemployed', adverb: '', collocation: 'to increase employment, full-time/part-time employee', collocation_tr: 'İstihdamı artırmak, tam zamanlı/yarı zamanlı çalışan' },
+            { headword: 'Enclose (attach)', translation: 'Eklemek', verb: 'enclose', noun: 'enclosure', adjective: 'enclosed', adverb: '', collocation: 'to enclose completely/fully/totally', collocation_tr: 'Tamamen/bütünüyle eklemek' },
+            { headword: 'Encounter', translation: 'Karşılaşmak', verb: 'encounter', noun: 'encounter', adjective: '', adverb: '', collocation: 'to be likely to encounter, a chance/unexpected encounter', collocation_tr: 'Karşılaşma olasılığı olmak, tesadüfi/beklenmedik bir karşılaşma' },
+            { headword: 'Endanger', translation: 'Tehlikeye atmak', verb: 'endanger', noun: '', adjective: 'endangered', adverb: '', collocation: 'to be highly endangered, endangered species/plants', collocation_tr: 'Büyük ölçüde tehlikede olmak, nesli tükenmekte olan türler/bitkiler' },
+            { headword: 'Enhance', translation: 'Geliştirmek, Artırmak', verb: 'enhance', noun: 'enhancement', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Enquire (about) / Inquire', translation: 'Sormak, Araştırmak', verb: 'enquire, inquire', noun: 'enquiry, inquiry', adjective: '', adverb: '', collocation: 'to enquire about, to carry out/conduct enquiry', collocation_tr: 'Hakkında soru sormak, soruşturma yürütmek' },
+            { headword: 'Entire', translation: 'Bütün, Tüm', verb: '', noun: '', adjective: 'entire', adverb: 'entirely', collocation: '', collocation_tr: '' },
+            { headword: 'Envy', translation: 'Kıskançlık', verb: 'envy', noun: 'envy', adjective: 'envious', adverb: '', collocation: 'to show extreme envy, to be envious', collocation_tr: 'Aşırı kıskançlık göstermek, kıskanç olmak' },
+            { headword: 'Equip (with)', translation: 'Donatmak', verb: 'equip', noun: 'equipment', adjective: 'equipped', adverb: '', collocation: 'to be equipped with, office/scientific equipment', collocation_tr: 'İle donatılmış olmak, ofis/bilimsel ekipman' },
+            { headword: 'Erosion', translation: 'Erozyon', verb: '', noun: 'erosion', adjective: '', adverb: '', collocation: 'the problem of soil erosion, serious/severe erosion', collocation_tr: 'Toprak erozyonu sorunu, ciddi/şiddetli erozyon' },
+            { headword: 'Estate', translation: 'Mülk, Emlak', verb: '', noun: 'estate, real estate', adjective: '', adverb: '', collocation: 'real estate agency/agent', collocation_tr: 'Emlak acentesi/danışmanı' },
+            { headword: 'Ethics', translation: 'Etik, Ahlak', verb: '', noun: 'ethics', adjective: 'ethical, unethical', adverb: '(un)ethically', collocation: 'personal/business medical ethics', collocation_tr: 'Kişisel/iş/tıp etiği' },
+            { headword: 'Evaluate', translation: 'Değerlendirmek', verb: 'evaluate', noun: 'evaluation', adjective: '', adverb: '', collocation: 'to fully/carefully/thoroughly evaluate, evaluation process', collocation_tr: 'Tam/dikkatli/kapsamlı bir şekilde değerlendirmek, değerlendirme süreci' },
+            { headword: 'Eventually', translation: 'Sonunda, Nihayetinde', verb: '', noun: '', adjective: 'eventual', adverb: 'eventually', collocation: '', collocation_tr: '' },
+            { headword: 'Evidence', translation: 'Kanıt, Delil', verb: '', noun: 'evidence', adjective: '', adverb: '', collocation: 'to look for/have evidence, clear/strong evidence', collocation_tr: 'Kanıt aramak/sahip olmak, açık/güçlü kanıt' },
+            { headword: 'Evil', translation: 'Kötü, Şeytani', verb: '', noun: 'evil', adjective: 'evil', adverb: '', collocation: 'to be/look/seem evil', collocation_tr: 'Kötü olmak/görünmek' },
+            { headword: 'Evolution', translation: 'Evrim', verb: 'evolve', noun: 'evolution', adjective: '', adverb: '', collocation: 'to evolve gradually/rapidly, to evolve from sth', collocation_tr: 'Yavaş yavaş/hızlı bir şekilde evrimleşmek, bir şeyden evrimleşmek' },
+            { headword: 'Exaggerate', translation: 'Abartmak', verb: 'exaggerate', noun: 'exaggeration', adjective: 'exaggerated', adverb: 'exaggeratedly', collocation: 'to exaggerate greatly, great/slight exaggeration', collocation_tr: 'Büyük ölçüde abartmak, büyük/hafif abartı' },
+            { headword: 'Examine', translation: 'İncelemek, Muayene etmek', verb: 'examine', noun: 'examination', adjective: '', adverb: '', collocation: 'fully/ properly examine, careful/ detailed/full examination', collocation_tr: 'Tam/doğru bir şekilde incelemek, dikkatli/detaylı/tam inceleme' },
+            { headword: 'Exclude', translation: 'Hariç tutmak', verb: 'exclude', noun: '', adjective: '', adverb: '', collocation: 'to be excluded from sth', collocation_tr: 'Bir şeyden hariç tutulmak' },
+            { headword: 'Exclusive', translation: 'Özel, Ayrıcalıklı', verb: '', noun: '', adjective: 'exclusive', adverb: '', collocation: 'to be exclusive to sth, an exclusive private club', collocation_tr: 'Bir şeye özel olmak, özel bir kulüp' },
+            { headword: 'Exist', translation: 'Var olmak', verb: 'exist', noun: 'existence', adjective: '', adverb: '', collocation: 'really/still exist, to continue to exist', collocation_tr: 'Gerçekten/hala var olmak, var olmaya devam etmek' },
+            { headword: 'Expected', translation: 'Beklenen', verb: 'expect', noun: 'expectation', adjective: 'expected, unexpected', adverb: '', collocation: 'great/high/low expectations, expected result', collocation_tr: 'Büyük/yüksek/düşük beklentiler, beklenen sonuç' },
+            { headword: 'Export / Import', translation: 'İhracat/İthalat', verb: 'export, import', noun: 'export, import', adjective: '', adverb: '', collocation: 'the export/import of sth', collocation_tr: 'Bir şeyin ihracatı/ithalatı' },
+            { headword: 'Expose', translation: 'Maruz bırakmak', verb: 'expose', noun: 'exposure', adjective: '', adverb: '', collocation: 'to be directly exposed to sth, high/massive/excessive exposure', collocation_tr: 'Bir şeye doğrudan maruz kalmak, yüksek/kitlesel/aşırı maruz kalma' },
+            { headword: 'Express', translation: 'İfade etmek', verb: 'express', noun: 'expression', adjective: '', adverb: '', collocation: 'to express well/fully/clearly, a clear/effective/powerful expression', collocation_tr: 'İyi/tam/açık bir şekilde ifade etmek, açık/etkili/güçlü bir ifade' },
+            { headword: 'Extent', translation: 'Boyut, Derece', verb: '', noun: 'extent', adjective: '', adverb: '', collocation: 'to a great extent, to some extent', collocation_tr: 'Büyük ölçüde, bir dereceye kadar' },
+            { headword: 'External / Internal', translation: 'Dış/İç', verb: '', noun: '', adjective: 'external, internal', adverb: 'externally, internally', collocation: '', collocation_tr: '' },
+            { headword: 'Extract', translation: 'Öz, Çıkarmak', verb: '', noun: 'extract', adjective: '', adverb: '', collocation: 'a brief/short/long extract from sth, natural/herbal extract', collocation_tr: 'Bir şeyden kısa/uzun bir alıntı, doğal/bitkisel öz' },
+            { headword: 'Extraordinary', translation: 'Olağanüstü', verb: '', noun: '', adjective: 'extraordinary', adverb: 'extraordinarily', collocation: 'to appear/be/look extraordinary', collocation_tr: 'Olağanüstü görünmek/olmak' },
+            { headword: 'Extreme', translation: 'Aşırı, Uç', verb: '', noun: '', adjective: 'extreme', adverb: 'extremely', collocation: 'to be/seem/sound extreme, in extreme pain/wealth', collocation_tr: 'Aşırı olmak/görünmek, aşırı acı/zenginlik içinde' },
+            { headword: 'Factor', translation: 'Faktör, Etken', verb: '', noun: 'factor', adjective: '', adverb: '', collocation: 'a main/significant/crucial factor, to consider a factor', collocation_tr: 'Ana/önemli/kritik bir faktör, bir faktörü göz önünde bulundurmak' },
+            { headword: 'Faint', translation: 'Bayılmak', verb: 'faint', noun: '', adjective: '', adverb: '', collocation: 'to be about to faint', collocation_tr: 'Bayılmak üzere olmak' },
+            { headword: 'Faith', translation: 'İnanç, Güven', verb: '', noun: 'faith', adjective: 'faithful', adverb: 'faithfully', collocation: 'to have faith in sth, absolute/complete/total faith', collocation_tr: 'Bir şeye inancı/güveni olmak, mutlak/tam inanç' },
+            { headword: 'Fancy', translation: 'Süslü, Hoşlanmak', verb: 'fancy', noun: '', adjective: 'fancy', adverb: '', collocation: 'fancy dress', collocation_tr: 'Kostüm' },
+            { headword: 'Fat', translation: 'Yağ, Şişman', verb: 'fatten', noun: 'fat', adjective: 'fatty, fattening, fat', adverb: '', collocation: 'body fat, to be high/low in fat', collocation_tr: 'Vücut yağı, yağ oranı yüksek/düşük olmak' },
+            { headword: 'fatal', translation: 'Ölümcül', verb: '', noun: '', adjective: 'fatal', adverb: 'fatally', collocation: 'injured fatally, fatal disease/accident/mistake', collocation_tr: 'Ölümcül yaralanmış, ölümcül hastalık/kaza/hata' },
+            { headword: 'Fate', translation: 'Kader', verb: '', noun: 'fate', adjective: '', adverb: '', collocation: 'a dreadful/terrible/cruel fate, to leave your fate in sb\'s hands', collocation_tr: 'Korkunç/berbat/acımasız bir kader, kaderini birinin ellerine bırakmak' },
+            { headword: 'fatigue', translation: 'Yorgunluk', verb: '', noun: 'fatique', adjective: '', adverb: '', collocation: 'suffer from fatigue, extreme/severe/mental fatique', collocation_tr: 'Yorgunluk çekmek, aşırı/şiddetli/zihinsel yorgunluk' },
+            { headword: 'Fault', translation: 'Hata, Kusur', verb: '', noun: 'fault', adjective: 'faultless', adverb: '', collocation: 'to be all/entirely your fault, a faultless performance', collocation_tr: 'Tamamen senin hatan olmak, kusursuz bir performans' },
+            { headword: 'Fear', translation: 'Korku', verb: 'fear', noun: 'fear', adjective: 'fearful, fearless', adverb: 'fearfully', collocation: 'deep/great/terrible fear, to be/seem fearless', collocation_tr: 'Derin/büyük/korkunç korku, korkusuz olmak/görünmek' },
+            { headword: 'Feather', translation: 'Tüy', verb: '', noun: 'feather', adjective: '', adverb: '', collocation: 'feather pillow, to be as light as a feather', collocation_tr: 'Tüy yastık, tüy kadar hafif olmak' },
+            { headword: 'Feature', translation: 'Özellik', verb: 'feature', noun: 'feature', adjective: '', adverb: '', collocation: 'essential/important/key/main features', collocation_tr: 'Temel/önemli/kilit/ana özellikler' },
+            { headword: 'Fed up', translation: 'Bıkmış, Sıkılmış', verb: '', noun: '', adjective: 'fed up', adverb: '', collocation: 'be/get fed up with', collocation_tr: 'Bir şeyden bıkmak/sıkılmak' },
+            { headword: 'Federal', translation: 'Federal', verb: '', noun: '', adjective: 'federal', adverb: '', collocation: 'the federal government, federal agency/agent/employee', collocation_tr: 'Federal hükümet, federal ajans/ajan/çalışan' },
+            { headword: 'Feed', translation: 'Beslemek', verb: 'feed', noun: 'food', adjective: '', adverb: '', collocation: 'to feed properly/well, to feed with', collocation_tr: 'Düzgün/iyi beslemek, ile beslemek' },
+            { headword: 'Fence', translation: 'Çit', verb: '', noun: 'fence', adjective: '', adverb: '', collocation: 'a garden/electric fence, to build a fence', collocation_tr: 'Bahçe/elektrikli çit, çit inşa etmek' },
+            { headword: 'fertility', translation: 'Doğurganlık, Verimlilik', verb: '', noun: 'fertility', adjective: 'fertile', adverb: '', collocation: 'fertile land, highly fertile soil, fertility rate', collocation_tr: 'Verimli toprak, oldukça verimli toprak, doğurganlık oranı' },
+            { headword: 'Figure', translation: 'Rakam, Figür', verb: 'figure', noun: 'figure', adjective: '', adverb: '', collocation: 'a dominant/legendary figure, to have/keep a good/beautiful figure', collocation_tr: 'Baskın/efsanevi bir figür, iyi/güzel bir fiziğe sahip olmak/korumak' },
+            { headword: 'Finance', translation: 'Finans, Finanse etmek', verb: 'finance', noun: 'finance', adjective: 'financial', adverb: 'financially', collocation: 'to finance largely/partially, a financial adviser', collocation_tr: 'Büyük ölçüde/kısmen finanse etmek, bir finans danışmanı' },
+            { headword: 'Flash', translation: 'Flaş, Parlama', verb: 'flash', noun: 'flash', adjective: '', adverb: '', collocation: 'to notice/see a bright flash, to flash sth at sb', collocation_tr: 'Parlak bir parlamayı fark etmek/görmek, birine bir şey parlatmak' },
+            { headword: 'Flexible / Inflexible', translation: 'Esnek/Esnek olmayan', verb: '', noun: 'flexibility', adjective: 'flexible, inflexible', adverb: '', collocation: 'to have considerably/enormous/great flexibility, to be/seem flexible', collocation_tr: 'Önemli/muazzam/büyük esnekliğe sahip olmak, esnek olmak/görünmek' },
+            { headword: 'Flour', translation: 'Un', verb: '', noun: 'flour', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Forbid', translation: 'Yasaklamak', verb: 'forbid', noun: '', adjective: 'forbidden', adverb: '', collocation: 'to forbid strictly, to be forbidden from doing sth', collocation_tr: 'Kesinlikle yasaklamak, bir şeyi yapmaktan men edilmek' },
+            { headword: 'Formulate', translation: 'Formüle etmek', verb: 'formulate', noun: 'formulation', adjective: '', adverb: '', collocation: 'to formulate plan/legislation, to formulate carefully', collocation_tr: 'Plan/mevzuat formüle etmek, dikkatlice formüle etmek' },
+            { headword: 'Forgetful', translation: 'Unutkan', verb: 'forget', noun: 'forgetfulness', adjective: 'forgetful', adverb: 'forgetfully', collocation: '', collocation_tr: '' },
+            { headword: 'Forthcoming', translation: 'Yaklaşan, Açık sözlü', verb: '', noun: '', adjective: 'forthcoming', adverb: '', collocation: 'be forthcoming', collocation_tr: 'Yakında olmak, açık sözlü olmak' },
+            { headword: 'Fortunate / Unfortunate', translation: 'Şanslı/Şanssız', verb: '', noun: 'fortune', adjective: 'fortunate, unfortunate', adverb: 'fortunately, unfortunately', collocation: 'to have ill/good fortune, to be fortunate to do sth', collocation_tr: 'Kötü/iyi şansa sahip olmak, bir şeyi yapma şansına sahip olmak' },
+            { headword: 'Founder', translation: 'Kurucu', verb: 'found', noun: 'founder, foundation', adjective: '', adverb: '', collocation: 'to be founded in + year, original founder', collocation_tr: '... yılında kurulmuş olmak, asıl kurucu' },
+            { headword: 'fragment', translation: 'Parça, Kırıntı', verb: '', noun: 'fragment', adjective: '', adverb: '', collocation: 'fragments of something', collocation_tr: 'Bir şeyin parçaları' },
+            { headword: 'Frame', translation: 'Çerçeve', verb: 'frame', noun: 'frame', adjective: '', adverb: '', collocation: 'a picture/window frame, to frame sth', collocation_tr: 'Resim/pencere çerçevesi, bir şeyi çerçevelemek' },
+            { headword: 'Fright', translation: 'Korku, Dehşet', verb: 'frighten', noun: 'fright', adjective: 'frightening, frightened', adverb: '', collocation: 'to be shaking with fright, to be/look/seem frightening/frightened', collocation_tr: 'Korkudan titremek, korkutucu/korkmuş olmak/görünmek' },
+            { headword: 'Frustration', translation: 'Hüsran, Hayal kırıklığı', verb: 'frustrate', noun: 'frustration', adjective: 'frustrating, frustrated', adverb: '', collocation: 'get frustrated (with/at), be frustrated with/at, in/with frustration', collocation_tr: 'Hayal kırıklığına uğramak, bir şeye/birine karşı hüsrana uğramış olmak, hüsran içinde' },
+            { headword: 'fulfill', translation: 'Yerine getirmek', verb: 'fulfill', noun: 'fulfillment', adjective: '', adverb: '', collocation: 'fulfill responsibilities/requirements, derive fulfillment from sth', collocation_tr: 'Sorumlulukları/gereksinimleri yerine getirmek, bir şeyden tatmin elde etmek' },
+            { headword: 'Fund', translation: 'Fon, Finanse etmek', verb: 'fund', noun: 'fund', adjective: '', adverb: '', collocation: 'to fund largely/partially, to allocate/raise funds', collocation_tr: 'Büyük ölçüde/kısmen finanse etmek, fon ayırmak/toplamak' },
+            { headword: 'Furthermore', translation: 'Ayrıca, Dahası', verb: '', noun: '', adjective: '', adverb: 'furthermore', collocation: '', collocation_tr: '' },
+            { headword: 'Gamble', translation: 'Kumar oynamak', verb: 'gamble', noun: 'gamble, gambling, gambler', adjective: '', adverb: '', collocation: 'to gamble on sth, a big/huge/desperate gamble', collocation_tr: 'Bir şey üzerine kumar oynamak, büyük/umutsuz bir kumar' },
+            { headword: 'Gear', translation: 'Vites, Donanım', verb: '', noun: 'gear', adjective: '', adverb: '', collocation: 'fishing/camping gear', collocation_tr: 'Balıkçılık/kamp malzemeleri' },
+            { headword: 'Gender', translation: 'Cinsiyet', verb: '', noun: 'gender', adjective: '', adverb: '', collocation: 'gender differences/inequality, gender identity/role', collocation_tr: 'Cinsiyet farklılıkları/eşitsizliği, cinsiyet kimliği/rolü' },
+            { headword: 'Gene', translation: 'Gen', verb: '', noun: 'gene, genetics', adjective: 'genetic', adverb: 'genetically', collocation: 'genetically modified food, genetic disorder/defect/inheritance', collocation_tr: 'Genetiği değiştirilmiş gıda, genetik bozukluk/kusur/kalıtım' },
+            { headword: 'Generate', translation: 'Üretmek, Yaratmak', verb: 'generate', noun: 'generation, generator', adjective: '', adverb: '', collocation: 'to generate electricity, electrical generator', collocation_tr: 'Elektrik üretmek, elektrik jeneratörü' },
+            { headword: 'Generosity', translation: 'Cömertlik', verb: '', noun: 'generosity', adjective: 'generous', adverb: 'generously', collocation: 'to show extraordinary/great/unusual generosity, to be/become/seem generous', collocation_tr: 'Olağanüstü/büyük/alışılmadık cömertlik göstermek, cömert olmak/görünmek' },
+            { headword: 'Genuine', translation: 'Gerçek, Hakiki', verb: '', noun: '', adjective: 'genuine', adverb: 'genuinely', collocation: 'to be/look genuine, to be genuinely interested in sth', collocation_tr: 'Gerçek olmak/görünmek, bir şeyle gerçekten ilgilenmek' },
+            { headword: 'gesture', translation: 'Jest, Hareket', verb: '', noun: 'gesture', adjective: '', adverb: '', collocation: 'make a gesture', collocation_tr: 'Bir jest yapmak' },
+            { headword: 'Global', translation: 'Küresel', verb: '', noun: 'globalisation, globe', adjective: 'global', adverb: 'globally', collocation: 'around the globe, global warming', collocation_tr: 'Dünya çapında, küresel ısınma' },
+            { headword: 'Glory', translation: 'Şan, Zafer', verb: '', noun: 'glory', adjective: 'glorious', adverb: 'gloriously', collocation: 'the glory of sth', collocation_tr: 'Bir şeyin şanı' },
+            { headword: 'God', translation: 'Tanrı', verb: '', noun: 'god, goddess', adjective: '', adverb: '', collocation: 'to believe in God, to worship/pray to/thank God', collocation_tr: 'Tanrı\'ya inanmak, Tanrı\'ya ibadet etmek/dua etmek/şükretmek' },
+            { headword: 'Govern', translation: 'Yönetmek', verb: 'govern', noun: 'government, governor', adjective: 'governmental', adverb: '', collocation: 'to govern well, to elect governor', collocation_tr: 'İyi yönetmek, vali seçmek' },
+            { headword: 'Gradual', translation: 'Kademeli', verb: '', noun: '', adjective: 'gradual', adverb: 'gradually', collocation: 'a gradual change/improvement, to gradually change sth', collocation_tr: 'Kademeli bir değişiklik/iyileşme, bir şeyi yavaş yavaş değiştirmek' },
+            { headword: 'Grant', translation: 'Vermek, Hibe', verb: 'grant', noun: '', adjective: '', adverb: '', collocation: 'to grant sb sth', collocation_tr: 'Birine bir şey vermek/bahşetmek' },
+            { headword: 'Grateful', translation: 'Minnettar', verb: '', noun: '', adjective: 'grateful', adverb: 'gratefully', collocation: 'to be/feel/look grateful, deeply/enormously/extremely grateful', collocation_tr: 'Minnettar olmak/hissetmek/görünmek, derinden/muazzam/son derece minnettar' },
+            { headword: 'Grave', translation: 'Mezar, Ciddi', verb: '', noun: '', adjective: 'grave', adverb: '', collocation: 'a grave mistake', collocation_tr: 'Ciddi bir hata' },
+            { headword: 'Greed', translation: 'Açgözlülük', verb: '', noun: 'greed', adjective: 'greedy', adverb: 'greedily', collocation: 'pure/sheer greed, to be driven by greed', collocation_tr: 'Saf/tam açgözlülük, açgözlülük tarafından yönlendirilmek' },
+            { headword: 'Guilt', translation: 'Suçluluk', verb: '', noun: 'guilt', adjective: 'guilty', adverb: 'guiltily', collocation: 'to be overwhelmed with guilt, to feel/look guilty about sth', collocation_tr: 'Suçluluk duygusuyla dolup taşmak, bir şey hakkında suçlu hissetmek/görünmek' },
+            { headword: 'Gun', translation: 'Silah', verb: '', noun: 'gun, gunfire, gunshot', adjective: '', adverb: '', collocation: 'to be armed with a gun, carry/have a gun', collocation_tr: 'Silahlı olmak, silah taşımak/sahip olmak' },
+            { headword: 'Hammer', translation: 'Çekiç', verb: '', noun: 'hammer', adjective: '', adverb: '', collocation: 'to hit sth with hammer', collocation_tr: 'Bir şeye çekiçle vurmak' },
+            { headword: 'Handful', translation: 'Bir avuç', verb: '', noun: 'handful', adjective: '', adverb: '', collocation: 'a handful of sth', collocation_tr: 'Bir avuç bir şey' },
+            { headword: 'Handle', translation: 'Ele almak, Kulp', verb: 'handle', noun: '', adjective: '', adverb: '', collocation: 'to handle sth', collocation_tr: 'Bir şeyi ele almak/idare etmek' },
+            { headword: 'Harm', translation: 'Zarar vermek', verb: 'harm', noun: 'harm', adjective: 'harmful, harmless', adverb: '', collocation: 'to cause/do harm, considerable/great/serious harm', collocation_tr: 'Zarar vermek, önemli/büyük/ciddi zarar' },
+            { headword: 'Heaven', translation: 'Cennet', verb: '', noun: 'heaven', adjective: 'heavenly', adverb: '', collocation: 'a heaven on earth, to go to heaven', collocation_tr: 'Yeryüzündeki bir cennet, cennete gitmek' },
+            { headword: 'Hesitate', translation: 'Tereddüt etmek', verb: 'hesitate', noun: 'hesitation', adjective: '', adverb: '', collocation: 'to hesitate a little/a moment, a brief/slight/momentary hesitation', collocation_tr: 'Biraz/bir an tereddüt etmek, kısa/hafif/anlık bir tereddüt' },
+            { headword: 'Highly', translation: 'Son derece', verb: '', noun: 'height', adjective: 'high', adverb: 'highly', collocation: '', collocation_tr: '' },
+            { headword: 'hint', translation: 'İpucu', verb: 'hint', noun: 'hint', adjective: '', adverb: '', collocation: 'give sbd a hint, a clear/strong hint', collocation_tr: 'Birine ipucu vermek, açık/güçlü bir ipucu' },
+            { headword: 'Homeless', translation: 'Evsiz', verb: '', noun: 'homelessness', adjective: 'homeless', adverb: '', collocation: 'to be/become/end up homeless', collocation_tr: 'Evsiz olmak/kalmak' },
+            { headword: 'Honour', translation: 'Onur', verb: 'honour', noun: 'honour', adjective: 'honoured, honourable', adverb: '', collocation: 'to be/feel honoured, deeply/greatly/truly honoured', collocation_tr: 'Onur duymak, derinden/büyük ölçüde/gerçekten onur duymak' },
+            { headword: 'Horn', translation: 'Boynuz, Korna', verb: '', noun: 'horn', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Humour', translation: 'Mizah', verb: '', noun: 'humour', adjective: 'humorous', adverb: 'humorously', collocation: 'to contain humour, extremely/very/quite/slightly humorous', collocation_tr: 'Mizah içermek, son derece/çok/oldukça/biraz esprili' },
+            { headword: 'Hurricane', translation: 'Kasırga', verb: '', noun: 'hurricane', adjective: '', adverb: '', collocation: 'the arrival of a hurricane, hurricane+blow', collocation_tr: 'Bir kasırganın gelişi, kasırga esmesi' },
+            { headword: 'Ignore', translation: 'Görmezden gelmek', verb: 'ignore', noun: 'ignorance', adjective: 'ignorant', adverb: '', collocation: 'to ignore completely/totally/consistently, to be widely ignored', collocation_tr: 'Tamamen/sürekli olarak görmezden gelmek, yaygın olarak görmezden gelinmek' },
+            { headword: 'Illustrate', translation: 'Resimlemek, Örneklemek', verb: 'illustrate', noun: 'illustration', adjective: '', adverb: '', collocation: 'to illustrate well/nicely, good/excellent/perfect illustration', collocation_tr: 'İyi/güzel bir şekilde resimlemek, iyi/mükemmel resimleme' },
+            { headword: 'Image', translation: 'İmaj, Görüntü', verb: '', noun: 'image', adjective: '', adverb: '', collocation: 'to create a positive/negative/macho image', collocation_tr: 'Pozitif/negatif/maço bir imaj yaratmak' },
+            { headword: 'Immediate', translation: 'Anında, Acil', verb: '', noun: '', adjective: 'immediate', adverb: 'immediately', collocation: 'immediate response/effect', collocation_tr: 'Anında yanıt/etki' },
+            { headword: 'Immigrant', translation: 'Göçmen', verb: 'immigrate, migrate, emigrate', noun: 'immigration, immigrant, migrant, migration', adjective: '', adverb: '', collocation: 'illegal immigration, an illegal/foreign immigrant', collocation_tr: 'Yasadışı göç, yasadışı/yabancı bir göçmen' },
+            { headword: 'Immoral/moral', translation: 'Ahlaksız/Ahlaklı', verb: '', noun: 'morality, immorality', adjective: 'moral, immoral', adverb: '', collocation: 'to protect/strengthen morality, moral standards/values', collocation_tr: 'Ahlakı korumak/güçlendirmek, ahlaki standartlar/değerler' },
+            { headword: 'Immune', translation: 'Bağışık', verb: '', noun: 'immunity', adjective: 'immune', adverb: '', collocation: 'become immune/remain immune, be immune to sth', collocation_tr: 'Bağışıklık kazanmak/bağışık kalmak, bir şeye karşı bağışık olmak' },
+            { headword: 'Impact', translation: 'Etki', verb: 'impact', noun: 'impact', adjective: '', adverb: '', collocation: 'to have/create an impact, big/considerable/dramatic/enormous impact', collocation_tr: 'Bir etkiye sahip olmak/yaratmak, büyük/önemli/dramatik/muazzam etki' },
+            { headword: 'Implement', translation: 'Uygulamak', verb: 'implement', noun: 'implementation', adjective: '', adverb: '', collocation: 'to implement a law/system/plan, effective/successful/complete/full implementation', collocation_tr: 'Bir yasa/sistem/plan uygulamak, etkili/başarılı/tam uygulama' },
+            { headword: 'Imply', translation: 'İma etmek', verb: 'imply', noun: 'implication', adjective: '', adverb: '', collocation: 'to clearly/usually imply, the implication is/was that + sentence', collocation_tr: 'Açıkça/genellikle ima etmek, ima edilen şuydu ki...' },
+            { headword: 'Impose', translation: 'Dayatmak, Uygulamak', verb: 'impose', noun: '', adjective: '', adverb: '', collocation: 'to impose a ban/tax', collocation_tr: 'Yasak/vergi uygulamak' },
+            { headword: 'Impress', translation: 'Etkilemek', verb: 'impress', noun: 'impression', adjective: 'impressive, impressed', adverb: 'impressively', collocation: 'to impress sb with sth, an impressive performance/view', collocation_tr: 'Birini bir şeyle etkilemek, etkileyici bir performans/manzara' },
+            { headword: 'Incident', translation: 'Olay', verb: '', noun: 'Incident, incidence', adjective: 'incidental', adverb: 'incidentally', collocation: 'major, serious incident', collocation_tr: 'Büyük, ciddi olay' },
+            { headword: 'Incline', translation: 'Eğim, Yatkın olmak', verb: 'incline', noun: '', adjective: 'inclined', adverb: '', collocation: 'a steep incline, to be inclined towards sth', collocation_tr: 'Dik bir yokuş, bir şeye eğilimli olmak' },
+            { headword: 'Income', translation: 'Gelir', verb: '', noun: 'income', adjective: '', adverb: '', collocation: 'to have/receive income, high/large/low/small income', collocation_tr: 'Gelire sahip olmak/gelir elde etmek, yüksek/büyük/düşük/az gelir' },
+            { headword: 'Incomplete / Complete', translation: 'Eksik/Tam', verb: 'complete', noun: 'completion', adjective: 'complete, incomplete', adverb: 'completely', collocation: 'to complete on schedule/on time, to be/remain incomplete', collocation_tr: 'Zamanında/programa göre tamamlamak, eksik olmak/kalmak' },
+            { headword: 'Inflation', translation: 'Enflasyon', verb: '', noun: 'inflation', adjective: '', adverb: '', collocation: 'to cause inflation, high/moderate/low inflation', collocation_tr: 'Enflasyona neden olmak, yüksek/orta/düşük enflasyon' },
+            { headword: 'Inherit', translation: 'Miras almak', verb: 'inherit', noun: 'inheritance', adjective: '', adverb: '', collocation: 'inheritance from sb, large/small inheritance', collocation_tr: 'Birinden miras kalması, büyük/küçük miras' },
+            { headword: 'Initial', translation: 'İlk, Başlangıç', verb: '', noun: '', adjective: 'initial', adverb: 'initially', collocation: '', collocation_tr: '' },
+            { headword: 'Injure', translation: 'Yaralamak', verb: 'injure', noun: 'injury', adjective: 'injured', adverb: '', collocation: 'to injure badly/severely/seriously, to cause injury', collocation_tr: 'Kötü/ciddi şekilde yaralamak, yaralanmaya neden olmak' },
+            { headword: 'Innate', translation: 'Doğuştan', verb: '', noun: '', adjective: 'innate', adverb: 'innately', collocation: 'an innate quality/ability', collocation_tr: 'Doğuştan gelen bir nitelik/yetenek' },
+            { headword: 'Innocent', translation: 'Masum', verb: '', noun: 'innocence', adjective: 'innocent', adverb: 'innocently', collocation: 'to be convinced of sb\'s innocence, to be completely/entirely innocent of sth', collocation_tr: 'Birinin masumiyetine ikna olmak, bir şeyden tamamen masum olmak' },
+            { headword: 'Input', translation: 'Girdi', verb: '', noun: 'input', adjective: '', adverb: '', collocation: 'to receive/get input, to provide input', collocation_tr: 'Girdi almak, girdi sağlamak' },
+            { headword: 'Inspector', translation: 'Müfettiş', verb: 'inspect', noun: 'inspection, inspector', adjective: '', adverb: '', collocation: 'to inspect carefully/closely/thoroughly, school/tax inspector', collocation_tr: 'Dikkatlice/yakından/kapsamlı bir şekilde denetlemek, okul/vergi müfettişi' },
+            { headword: 'Inspiration', translation: 'İlham', verb: 'inspire', noun: 'inspiration', adjective: 'inspirational, inspiring, inspired', adverb: '', collocation: 'great/sheer inspiration, to find/get/gain inspiration', collocation_tr: 'Büyük/saf ilham, ilham bulmak/almak/kazanmak' },
+            { headword: 'Instant', translation: 'Anlık', verb: '', noun: '', adjective: 'instant', adverb: 'instantly', collocation: 'an instant success, instant coffee', collocation_tr: 'Anlık bir başarı, hazır kahve' },
+            { headword: 'Instinct', translation: 'İçgüdü', verb: '', noun: 'instinct', adjective: 'instinctive', adverb: 'instinctively', collocation: 'first instinct, have a deep/powerful/strong instinct', collocation_tr: 'İlk içgüdü, derin/güçlü bir içgüdüye sahip olmak' },
+            { headword: 'Institution', translation: 'Kurum', verb: '', noun: 'institution', adjective: 'institutional', adverb: '', collocation: 'a mental institution, a financial/research/educational institution', collocation_tr: 'Akıl hastanesi, bir finans/araştırma/eğitim kurumu' },
+            { headword: 'Insufficient / Sufficient', translation: 'Yetersiz/Yeterli', verb: '', noun: '', adjective: 'insufficient, sufficient', adverb: 'insufficiently, sufficiently', collocation: 'prove insufficient', collocation_tr: 'Yetersiz olduğunu kanıtlamak' },
+            { headword: 'Insult', translation: 'Hakaret etmek', verb: 'insult', noun: 'insult', adjective: 'insulting, insulted', adverb: '', collocation: 'to insult publicly, a bad/terrible/deliberate insult to sb', collocation_tr: 'Alenen hakaret etmek, birine kötü/korkunç/kasıtlı bir hakaret' },
+            { headword: 'Insure / Ensure', translation: 'Sigortalamak/Sağlamak', verb: 'insure, ensure', noun: 'insurance', adjective: 'insured', adverb: '', collocation: 'to insure sb/sth against sth, to ensure that + sentence', collocation_tr: 'Birini/bir şeyi bir şeye karşı sigortalamak, ...olmasını sağlamak' },
+            { headword: 'Intellectual', translation: 'Entelektüel', verb: '', noun: 'intellect', adjective: 'intellectual', adverb: 'intellectually', collocation: 'intellectual capacity, human intellect', collocation_tr: 'Entelektüel kapasite, insan zekası' },
+            { headword: 'Intelligence', translation: 'Zeka', verb: '', noun: 'intelligence', adjective: 'intelligent', adverb: 'intelligently', collocation: 'to have/demonstrate/show intelligence, intelligence test', collocation_tr: 'Zekaya sahip olmak/göstermek, zeka testi' },
+            { headword: 'Intend', translation: 'Niyet etmek', verb: 'intend', noun: 'intention', adjective: 'intentional, unintentional', adverb: 'intentionally, unintentionally', collocation: 'to intend to do sth, intention of doing sth', collocation_tr: 'Bir şeyi yapmaya niyet etmek, bir şeyi yapma niyeti' },
+            { headword: 'Intensive', translation: 'Yoğun', verb: '', noun: '', adjective: 'intensive', adverb: 'intensively', collocation: 'intensive training/course, intensive care', collocation_tr: 'Yoğun eğitim/kurs, yoğun bakım' },
+            { headword: 'Interfere', translation: 'Müdahale etmek', verb: 'interfere', noun: 'interference', adjective: '', adverb: '', collocation: 'to interfere directly/seriously, to interfere with/in sth', collocation_tr: 'Doğrudan/ciddi bir şekilde müdahale etmek, bir şeye müdahale etmek' },
+            { headword: 'Interior', translation: 'İç', verb: '', noun: 'interior', adjective: '', adverb: '', collocation: 'interior design, interior designer/decorator', collocation_tr: 'İç tasarım, iç mimar/dekoratör' },
+            { headword: 'Interpret', translation: 'Yorumlamak', verb: 'interpret', noun: 'interpretation, interpreter', adjective: '', adverb: '', collocation: 'to interpret correctly/wrongly/differently, to speak through an interpreter', collocation_tr: 'Doğru/yanlış/farklı yorumlamak, bir tercüman aracılığıyla konuşmak' },
+            { headword: 'Invest', translation: 'Yatırım yapmak', verb: 'invest', noun: 'investment, investor', adjective: '', adverb: '', collocation: 'to invest in sth, a good/excellent/profitable investment', collocation_tr: 'Bir şeye yatırım yapmak, iyi/mükemmel/karlı bir yatırım' },
+            { headword: 'Investigate', translation: 'Araştırmak, Soruşturmak', verb: 'investigate', noun: 'investigation, investigator', adjective: '', adverb: '', collocation: 'to investigate carefully/closely, to carry out/conduct an investigation', collocation_tr: 'Dikkatlice/yakından araştırmak, bir soruşturma yürütmek' },
+            { headword: 'Iron', translation: 'Demir, Ütü', verb: 'iron', noun: 'ironing, iron', adjective: '', adverb: '', collocation: 'to produce iron, rusty iron, ironing board', collocation_tr: 'Demir üretmek, paslı demir, ütü masası' },
+            { headword: 'Ironic', translation: 'İronik', verb: '', noun: 'irony', adjective: 'ironic', adverb: 'ironically', collocation: 'powerful sense of irony, seem ironic', collocation_tr: 'Güçlü ironi anlayışı, ironik görünmek' },
+            { headword: 'Irrational / Rational', translation: 'Mantıksız/Mantıklı', verb: '', noun: 'rationale', adjective: 'rational, irrational', adverb: 'rationally', collocation: 'the rationale behind sth, a rational argument/debate/explanation', collocation_tr: 'Bir şeyin arkasındaki mantık, mantıklı bir argüman/tartışma/açıklama' },
+            { headword: 'Irritate', translation: 'Sinirlendirmek, Tahriş etmek', verb: 'irritate', noun: 'irritation', adjective: 'irritating, irritated', adverb: 'irritatingly', collocation: 'to really irritate, to be/feel/look irritated', collocation_tr: 'Gerçekten sinirlendirmek, sinirli olmak/hissetmek/görünmek' },
+            { headword: 'Issue (topic/subject)', translation: 'Mesele, Konu', verb: '', noun: 'issue', adjective: '', adverb: '', collocation: 'to raise/discuss an issue, a burning/critical/crucial issue', collocation_tr: 'Bir konuyu gündeme getirmek/tartışmak, yakıcı/kritik/önemli bir mesele' },
+            { headword: 'Judge', translation: 'Yargıç, Yargılamak', verb: 'judge', noun: 'judgement, judge', adjective: 'judgemental', adverb: '', collocation: 'Don\'t judge a book by its cover., to make a judgement about sth', collocation_tr: 'Bir kitabı kapağına göre yargılama., bir şey hakkında bir yargıda bulunmak' },
+            { headword: 'Justice', translation: 'Adalet', verb: '', noun: 'justice', adjective: '', adverb: '', collocation: 'to ask for/want justice, to bring sb to justice', collocation_tr: 'Adalet istemek, birini adalete teslim etmek' },
+            { headword: 'Justify', translation: 'Gerekçelendirmek, Haklı çıkarmak', verb: 'justify', noun: 'justification', adjective: 'justifiable', adverb: '', collocation: 'to really/truly justify, considerable/sufficient justification', collocation_tr: 'Gerçekten haklı çıkarmak, önemli/yeterli gerekçe' },
+            { headword: 'Kidnap', translation: 'Kaçırmak (insan)', verb: 'kidnap', noun: 'kidnapping, kidnapper', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Kindness', translation: 'Nezaket, İyilik', verb: '', noun: 'kindness, unkindness', adjective: 'kind, unkind', adverb: 'kindly, unkindly', collocation: 'great/natural/unexpected kindness, to show sb kindness', collocation_tr: 'Büyük/doğal/beklenmedik nezaket, birine nezaket göstermek' },
+            { headword: 'Kneel', translation: 'Diz çökmek', verb: 'kneel', noun: 'knee', adjective: '', adverb: '', collocation: 'to kneel down', collocation_tr: 'Diz çökmek' },
+            { headword: 'Last', translation: 'Sürmek, Son', verb: 'last', noun: '', adjective: 'last', adverb: 'last', collocation: '', collocation_tr: '' },
+            { headword: 'Latter / Former', translation: 'İkincisi/Birincisi', verb: '', noun: '', adjective: 'latter, former', adverb: 'latterly, formerly', collocation: 'the former president/wife/employer', collocation_tr: 'Eski başkan/eş/işveren' },
+            { headword: 'Launch', translation: 'Başlatmak, Fırlatmak', verb: 'launch', noun: 'launch', adjective: '', adverb: '', collocation: 'the launch of the space shuttle', collocation_tr: 'Uzay mekiğinin fırlatılışı' },
+            { headword: 'Lay', translation: 'Koymak, Yumurtlamak', verb: 'lay', noun: '', adjective: '', adverb: '', collocation: 'to lay the table, to lay eggs', collocation_tr: 'Masayı kurmak, yumurtlamak' },
+            { headword: 'Lead', translation: 'Liderlik etmek, Kurşun', verb: 'lead, mislead', noun: 'leader, leadership', adjective: 'leading, misleading', adverb: '', collocation: 'to lead the way, to lead to sth, a born/natural/charismatic leader', collocation_tr: 'Yol göstermek, bir şeye yol açmak, doğuştan/doğal/karizmatik bir lider' },
+            { headword: 'Liberty', translation: 'Özgürlük', verb: '', noun: 'liberty', adjective: '', adverb: '', collocation: 'to lose/win liberty, to fight to protect liberty', collocation_tr: 'Özgürlüğü kaybetmek/kazanmak, özgürlüğü korumak için savaşmak' },
+            { headword: 'Literary', translation: 'Edebi', verb: '', noun: 'literature', adjective: 'literary', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Lively', translation: 'Canlı, Hareketli', verb: 'live', noun: 'liveliness', adjective: 'lively', adverb: '', collocation: 'a lively conversation/debate, a lively child', collocation_tr: 'Canlı bir sohbet/tartışma, hareketli bir çocuk' },
+            { headword: 'Loan', translation: 'Kredi, Borç', verb: 'loan', noun: 'loan', adjective: '', adverb: '', collocation: 'a bank loan, to apply for/ask for loan', collocation_tr: 'Banka kredisi, kredi başvurusunda bulunmak/istemek' },
+            { headword: 'Locate', translation: 'Yerini belirlemek', verb: 'locate, dislocate', noun: 'location, dislocation', adjective: '', adverb: '', collocation: 'to locate accurately/precisely, the precise/exact/specific location', collocation_tr: 'Doğru/kesin olarak yerini belirlemek, kesin/tam/belirli konum' },
+            { headword: 'Logic', translation: 'Mantık', verb: '', noun: 'logic', adjective: 'logical, illogical', adverb: 'logically, illogically', collocation: 'to understand the logic behind sth, to be/seem/sound (il)logical', collocation_tr: 'Bir şeyin arkasındaki mantığı anlamak, mantıklı/mantıksız olmak/görünmek' },
+            { headword: 'Loyal', translation: 'Sadık', verb: '', noun: 'loyalty', adjective: 'loyal', adverb: '', collocation: 'extremely, very loyal, show loyalty to, for, from', collocation_tr: 'Son derece, çok sadık, -e sadakat göstermek' },
+            { headword: 'Lung', translation: 'Akciğer', verb: '', noun: 'lung', adjective: '', adverb: '', collocation: 'lung cancer', collocation_tr: 'Akciğer kanseri' },
+            { headword: 'Mail', translation: 'Posta', verb: 'mail', noun: 'mail, e-mail', adjective: '', adverb: '', collocation: 'to mail to sb, junk mail, voice mail', collocation_tr: 'Birine posta göndermek, önemsiz posta, sesli posta' },
+            { headword: 'Maintain', translation: 'Sürdürmek, Bakım yapmak', verb: 'maintain', noun: 'maintenance', adjective: '', adverb: '', collocation: 'to maintain order, annual/regular/routine maintenance', collocation_tr: 'Düzeni sürdürmek, yıllık/düzenli/rutin bakım' },
+            { headword: 'Manual', translation: 'El ile yapılan, Kılavuz', verb: '', noun: 'manual', adjective: 'manual', adverb: 'manually', collocation: 'manual labour/work, instruction manual', collocation_tr: 'El emeği/işi, kullanım kılavuzu' },
+            { headword: 'Manufacture', translation: 'Üretmek', verb: 'manufacture', noun: 'manufacture, manufacturing, manufacturer', adjective: '', adverb: '', collocation: 'to manufacture products, large-scale/industrial manufacturing', collocation_tr: 'Ürünler üretmek, büyük ölçekli/endüstriyel üretim' },
+            { headword: 'Mass', translation: 'Kütle, Kitle', verb: '', noun: 'mass', adjective: 'mass, massive', adverb: 'massively', collocation: 'enormous/great/huge/large mass of sth, mass production/destruction', collocation_tr: 'Muazzam/büyük kütleli bir şey, seri üretim/yıkım' },
+            { headword: 'Mayor', translation: 'Belediye başkanı', verb: '', noun: 'mayor', adjective: '', adverb: '', collocation: 'local mayor, to elect sb as mayor', collocation_tr: 'Yerel belediye başkanı, birini belediye başkanı olarak seçmek' },
+            { headword: 'Measure', translation: 'Ölçmek, Önlem', verb: 'measure', noun: 'measure', adjective: '', adverb: '', collocation: 'take measures, adopt/introduce a measure, a safety measure', collocation_tr: 'Önlem almak, bir önlem benimsemek/getirmek, bir güvenlik önlemi' },
+            { headword: 'Means', translation: 'Araç, Vasıta', verb: '', noun: 'means', adjective: '', adverb: '', collocation: 'an effective/efficient means of, a means of transport/communication', collocation_tr: 'Etkili/verimli bir yolu, bir ulaşım/iletişim aracı' },
+            { headword: 'Media', translation: 'Medya', verb: '', noun: 'media, medium', adjective: '', adverb: '', collocation: 'media coverage/reports/interest, local/national media', collocation_tr: 'Medya kapsamı/raporları/ilgisi, yerel/ulusal medya' },
+            { headword: 'Medical', translation: 'Tıbbi', verb: '', noun: 'medicine', adjective: 'medical', adverb: 'medically', collocation: 'modern/traditional medicine, medical advice/books', collocation_tr: 'Modern/geleneksel tıp, tıbbi tavsiye/kitaplar' },
+            { headword: 'Mental', translation: 'Zihinsel', verb: '', noun: '', adjective: 'mental', adverb: 'mentally', collocation: 'mental health/illness, a mentally ill person', collocation_tr: 'Akıl sağlığı/hastalığı, akıl hastası bir kişi' },
+            { headword: 'Mind', translation: 'Zihin, Aldırmak', verb: 'mind', noun: '', adjective: '', adverb: '', collocation: 'not mind doing something, Never mind!, Do you mind....?', collocation_tr: 'Bir şey yapmaktan çekinmemek, Boş ver!, Sakıncası var mı...?' },
+            { headword: 'Ministry', translation: 'Bakanlık', verb: '', noun: 'ministry, minister', adjective: '', adverb: '', collocation: 'The Ministry of Education/Defence/Agriculture, prime/chief minister', collocation_tr: 'Eğitim/Savunma/Tarım Bakanlığı, başbakan' },
+            { headword: 'Minor / Major', translation: 'Küçük/Büyük', verb: '', noun: 'minority, majority', adjective: 'minor, major', adverb: '', collocation: 'to be/seem minor', collocation_tr: 'Küçük olmak/görünmek' },
+            { headword: 'mission', translation: 'Görev', verb: '', noun: 'mission', adjective: '', adverb: '', collocation: 'dangerous mission, complete a mission', collocation_tr: 'Tehlikeli görev, bir görevi tamamlamak' },
+            { headword: 'mobility', translation: 'Hareketlilik', verb: '', noun: 'mobility', adjective: 'mobile', adverb: '', collocation: 'limited/increased mobility, job/social mobility', collocation_tr: 'Sınırlı/artmış hareketlilik, iş/sosyal hareketlilik' },
+            { headword: 'Mood', translation: 'Ruh hali', verb: '', noun: 'mood, moon', adjective: 'moody', adverb: '', collocation: 'to be in a good/bad mood, to be moody', collocation_tr: 'İyi/kötü bir ruh halinde olmak, karamsar olmak' },
+            { headword: 'Moonlight', translation: 'Ay ışığı', verb: '', noun: 'moonlight', adjective: '', adverb: '', collocation: 'bright/clear/pale moonlight', collocation_tr: 'Parlak/açık/solgun ay ışığı' },
+            { headword: 'mortgage', translation: 'İpotek', verb: '', noun: 'mortgage', adjective: '', adverb: '', collocation: 'take out/pay off mortgage, big/small mortgage', collocation_tr: 'İpotek kredisi çekmek/ödemek, büyük/küçük ipotek' },
+            { headword: 'Motion', translation: 'Hareket', verb: '', noun: 'motion', adjective: 'motionless', adverb: '', collocation: 'circular motion, to be/remain motionless', collocation_tr: 'Dairesel hareket, hareketsiz olmak/kalmak' },
+            { headword: 'Motorist', translation: 'Sürücü', verb: '', noun: 'motor, motorist, motorway, motorbike/motorcycle', adjective: '', adverb: '', collocation: 'a large/powerful motor, a busy motorway', collocation_tr: 'Büyük/güçlü bir motor, işlek bir otoyol' },
+            { headword: 'Murder', translation: 'Cinayet', verb: 'murder', noun: 'murder, murderer', adjective: '', adverb: '', collocation: 'to murder in cold blood, mass murder', collocation_tr: 'Soğukkanlılıkla öldürmek, toplu katliam' },
+            { headword: 'Nail', translation: 'Tırnak, Çivi', verb: 'nail', noun: 'nail', adjective: '', adverb: '', collocation: 'nail polish, to nail sth to sth', collocation_tr: 'Oje, bir şeyi bir şeye çivilemek' },
+            { headword: 'Naked', translation: 'Çıplak', verb: '', noun: '', adjective: 'naked', adverb: '', collocation: 'to be/appear/feel naked, to be seen with the naked eye', collocation_tr: 'Çıplak olmak/görünmek/hissetmek, çıplak gözle görülmek' },
+            { headword: 'Nationwide', translation: 'Ülke çapında', verb: '', noun: '', adjective: 'nationwide', adverb: 'nationwide', collocation: 'a nationwide campaign, to carry out nationwide', collocation_tr: 'Ülke çapında bir kampanya, ülke çapında yürütmek' },
+            { headword: 'Native', translation: 'Yerli', verb: '', noun: 'native', adjective: 'native', adverb: '', collocation: 'Native American', collocation_tr: 'Kızılderili (Amerikan Yerlisi)' },
+            { headword: 'Navy', translation: 'Donanma', verb: '', noun: 'navy', adjective: '', adverb: '', collocation: 'to have/build a navy, to join the navy', collocation_tr: 'Bir donanmaya sahip olmak/inşa etmek, donanmaya katılmak' },
+            { headword: 'Needle', translation: 'İğne', verb: '', noun: 'needle', adjective: '', adverb: '', collocation: 'long/sharp needle, to use a needle', collocation_tr: 'Uzun/keskin iğne, iğne kullanmak' },
+            { headword: 'Network', translation: 'Ağ', verb: '', noun: 'network', adjective: '', adverb: '', collocation: 'social network, television/computer network', collocation_tr: 'Sosyal ağ, televizyon/bilgisayar ağı' },
+            { headword: 'Neutral', translation: 'Tarafsız', verb: '', noun: '', adjective: 'neutral', adverb: '', collocation: 'remain/stay neutral', collocation_tr: 'Tarafsız kalmak' },
+            { headword: 'Nevertheless', translation: 'Yine de, Buna rağmen', verb: '', noun: '', adjective: '', adverb: 'nevertheless', collocation: '', collocation_tr: '' },
+            { headword: 'Nonetheless', translation: 'Yine de, Her şeye rağmen', verb: '', noun: '', adjective: '', adverb: 'nonetheless', collocation: '', collocation_tr: '' },
+            { headword: 'Nonsense', translation: 'Saçmalık', verb: '', noun: 'nonsense', adjective: '', adverb: '', collocation: 'to talk nonsense, absolute/complete/pure/utter nonsense', collocation_tr: 'Saçmalamak, mutlak/tam/saf/tamamen saçmalık' },
+            { headword: 'Northern', translation: 'Kuzey', verb: '', noun: 'north', adjective: 'northern', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'novice', translation: 'Acemi', verb: '', noun: 'novice', adjective: '', adverb: '', collocation: 'novice pilot/teacher/user', collocation_tr: 'Acemi pilot/öğretmen/kullanıcı' },
+            { headword: 'Objection', translation: 'İtiraz', verb: 'object', noun: 'objection', adjective: '', adverb: '', collocation: 'to object to sth, to have/make objection', collocation_tr: 'Bir şeye itiraz etmek, itirazda bulunmak' },
+            { headword: 'Observe', translation: 'Gözlemlemek', verb: 'observe', noun: 'observation, observer', adjective: '', adverb: '', collocation: 'to observe carefully/closely, careful/close/detailed observation', collocation_tr: 'Dikkatlice/yakından gözlemlemek, dikkatli/yakın/detaylı gözlem' },
+            { headword: 'Obstacle', translation: 'Engel', verb: '', noun: 'obstacle', adjective: '', adverb: '', collocation: 'to overcome a main/major obstacle', collocation_tr: 'Ana/büyük bir engeli aşmak' },
+            { headword: 'Obtain', translation: 'Elde etmek', verb: 'obtain', noun: '', adjective: 'obtainable', adverb: '', collocation: 'to obtain a degree', collocation_tr: 'Diploma almak' },
+            { headword: 'Occasion', translation: 'Fırsat, Vesile', verb: '', noun: 'occasion', adjective: 'occasional', adverb: 'occasionally', collocation: 'a special occasion', collocation_tr: 'Özel bir durum/vesile' },
+            { headword: 'Occupy', translation: 'İşgal etmek, Meşgul etmek', verb: 'occupy', noun: 'occupier, occupation', adjective: 'occupied', adverb: '', collocation: 'to occupy the city, to keep sb occupied with sth', collocation_tr: 'Şehri işgal etmek, birini bir şeyle meşgul etmek' },
+            { headword: 'Occur', translation: 'Meydana gelmek', verb: 'occur', noun: 'occurrence', adjective: '', adverb: '', collocation: 'to occur commonly/frequently, a common occurrence', collocation_tr: 'Yaygın/sık bir şekilde meydana gelmek, yaygın bir olay' },
+            { headword: 'Odd', translation: 'Garip, Tek (sayı)', verb: '', noun: '', adjective: 'odd', adverb: 'oddly', collocation: 'to be/feel/seem odd, It\'s odd that + sentence', collocation_tr: 'Garip olmak/hissetmek/görünmek, ... olması garip' },
+            { headword: 'Offend', translation: 'Gücendirmek, Kırmak', verb: 'offend', noun: 'offence, offender', adjective: 'offensive, offended', adverb: '', collocation: 'to offend deeply/gravely/greatly, to cause/give offence', collocation_tr: 'Derinden/ciddi şekilde gücendirmek, gücenmeye neden olmak' },
+            { headword: 'Offer', translation: 'Teklif etmek', verb: 'offer', noun: 'offer', adjective: '', adverb: '', collocation: 'to offer kindly/generously, a job offer', collocation_tr: 'Nazikçe/cömertçe teklif etmek, bir iş teklifi' },
+            { headword: 'Opponent', translation: 'Rakip', verb: '', noun: 'opponent', adjective: '', adverb: '', collocation: 'a dangerous/main opponent, a political opponent', collocation_tr: 'Tehlikeli/ana bir rakip, siyasi bir rakip' },
+            { headword: 'Oppose', translation: 'Karşı çıkmak', verb: 'oppose', noun: 'opposition, opposite', adjective: 'opposed', adverb: '', collocation: 'to oppose firmly/strongly, to express considerable/strong opposition', collocation_tr: 'Kesin/güçlü bir şekilde karşı çıkmak, önemli/güçlü bir muhalefet ifade etmek' },
+            { headword: 'Origin', translation: 'Köken', verb: 'originate', noun: 'origin, originality', adjective: 'original', adverb: 'originally', collocation: 'to originate in + place, to be extremely/highly original', collocation_tr: '...de ortaya çıkmak, son derece/çok orijinal olmak' },
+            { headword: 'Ornament', translation: 'Süs', verb: 'ornament', noun: '', adjective: 'ornamental', adverb: '', collocation: 'to be highly/very ornamental', collocation_tr: 'Çok süslü olmak' },
+            { headword: 'Outcome', translation: 'Sonuç', verb: '', noun: 'outcome', adjective: '', adverb: '', collocation: 'major outcome', collocation_tr: 'Büyük sonuç' },
+            { headword: 'Output', translation: 'Çıktı, Üretim', verb: 'output', noun: '', adjective: '', adverb: '', collocation: 'manufacturing output, industrial output, agricultural output', collocation_tr: 'İmalat üretimi, sanayi üretimi, tarımsal üretim' },
+            { headword: 'Outstanding', translation: 'Olağanüstü, Göze çarpan', verb: '', noun: '', adjective: 'outstanding', adverb: 'outstandingly', collocation: 'to be outstanding, outstandingly successful', collocation_tr: 'Olağanüstü olmak, olağanüstü başarılı' },
+            { headword: 'Overcome', translation: 'Üstesinden gelmek', verb: 'overcome', noun: '', adjective: '', adverb: '', collocation: 'to overcome completely/successfully, to overcome a main/major obstacle', collocation_tr: 'Tamamen/başarıyla üstesinden gelmek, ana/büyük bir engelin üstesinden gelmek' },
+            { headword: 'Overseas', translation: 'Denizaşırı', verb: '', noun: '', adjective: 'overseas', adverb: 'overseas', collocation: 'to live/work overseas, an overseas student', collocation_tr: 'Yurtdışında yaşamak/çalışmak, yabancı bir öğrenci' },
+            { headword: 'Owe', translation: 'Borçlu olmak', verb: 'owe', noun: '', adjective: '', adverb: '', collocation: 'to owe sb an apology/explanation, to owe money', collocation_tr: 'Birine bir özür/açıklama borçlu olmak, para borçlu olmak' },
+            { headword: 'Pace', translation: 'Hız, Adım', verb: 'pace', noun: '', adjective: '', adverb: '', collocation: 'the pace of sth, to increase/decrease/maintain pace', collocation_tr: 'Bir şeyin hızı, hızı artırmak/azaltmak/korumak' },
+            { headword: 'parade', translation: 'Geçit töreni', verb: 'parade', noun: '', adjective: '', adverb: '', collocation: 'hold a parade, fashion/colorful parade', collocation_tr: 'Geçit töreni düzenlemek, moda/renkli geçit töreni' },
+            { headword: 'Parliament', translation: 'Parlamento', verb: '', noun: 'parliament', adjective: '', adverb: '', collocation: 'parliament to approve sth', collocation_tr: 'Parlamentonun bir şeyi onaylaması' },
+            { headword: 'Partial', translation: 'Kısmi, Taraf tutan', verb: '', noun: '', adjective: 'partial', adverb: 'partially', collocation: 'to be partial, partially cooked', collocation_tr: 'Taraf tutmak, kısmen pişmiş' },
+            { headword: 'Particular', translation: 'Özel, Belirli', verb: '', noun: '', adjective: 'particular', adverb: 'particularly', collocation: '', collocation_tr: '' },
+            { headword: 'Passage', translation: 'Geçit, Pasaj', verb: '', noun: 'passage, passageway', adjective: '', adverb: '', collocation: 'long/short/narrow passage', collocation_tr: 'Uzun/kısa/dar geçit' },
+            { headword: 'Passion', translation: 'Tutku', verb: '', noun: 'passion', adjective: 'passionate, passionless', adverb: 'passionately', collocation: 'to arouse/awaken passion, to be passionate about sth', collocation_tr: 'Tutkuyu uyandırmak, bir şeye tutkulu olmak' },
+            { headword: 'Pause', translation: 'Duraklamak', verb: 'pause', noun: 'pause', adjective: '', adverb: '', collocation: 'to pause briefly, a brief/momentary/short/long pause', collocation_tr: 'Kısaca duraklamak, kısa/anlık/uzun bir duraklama' },
+            { headword: 'Peak', translation: 'Zirve', verb: '', noun: 'peak', adjective: 'peak', adverb: '', collocation: 'high/rocky peak, to reach a peak', collocation_tr: 'Yüksek/kayalık zirve, bir zirveye ulaşmak' },
+            { headword: 'Pension', translation: 'Emekli maaşı', verb: '', noun: 'pension', adjective: '', adverb: '', collocation: 'to get/receive a pension, to live on state pension', collocation_tr: 'Emekli maaşı almak, devlet emekli maaşıyla yaşamak' },
+            { headword: 'Perceive', translation: 'Algılamak', verb: 'perceive', noun: 'perception', adjective: '', adverb: '', collocation: 'to perceive clearly/easily/readily, clear/common/widely-held perception', collocation_tr: 'Açıkça/kolayca algılamak, açık/yaygın algı' },
+            { headword: 'Permanent', translation: 'Kalıcı', verb: '', noun: '', adjective: 'permanent', adverb: 'permanently', collocation: 'to be permanent, to make sth permanent', collocation_tr: 'Kalıcı olmak, bir şeyi kalıcı yapmak' },
+            { headword: 'Permit', translation: 'İzin vermek', verb: 'permit', noun: 'permission', adjective: 'permissive, permissible', adverb: '', collocation: 'to permit legally, to have/gain permission', collocation_tr: 'Yasal olarak izin vermek, izin almak/sahip olmak' },
+            { headword: 'Perspective', translation: 'Bakış açısı', verb: '', noun: 'perspective', adjective: '', adverb: '', collocation: 'different/new/broader perspective, to see things from a different perspective', collocation_tr: 'Farklı/yeni/daha geniş bir bakış açısı, olayları farklı bir bakış açısından görmek' },
+            { headword: 'Phase', translation: 'Aşama, Evre', verb: '', noun: 'phase', adjective: '', adverb: '', collocation: 'during a phase, to go through a phase', collocation_tr: 'Bir aşama sırasında, bir aşamadan geçmek' },
+            { headword: 'Phenomenon', translation: 'Olgu, Fenomen', verb: '', noun: 'phenomenon (SG), phenomena (PL)', adjective: 'phenomenal', adverb: '', collocation: 'to investigate a phenomenon, common/universal/widespread phenomenon', collocation_tr: 'Bir olguyu araştırmak, yaygın/evrensel bir olgu' },
+            { headword: 'Pint (of beer/milk)', translation: 'Büyük bardak (bira/süt)', verb: '', noun: 'pint', adjective: '', adverb: '', collocation: 'pint of beer/milk', collocation_tr: 'Bir büyük bardak bira/süt' },
+            { headword: 'Portion', translation: 'Porsiyon, Kısım', verb: '', noun: 'portion', adjective: '', adverb: '', collocation: 'a portion of sth, a generous/large portion', collocation_tr: 'Bir şeyin bir kısmı, cömert/büyük bir porsiyon' },
+            { headword: 'Position', translation: 'Pozisyon, Konum', verb: '', noun: 'position', adjective: '', adverb: '', collocation: 'correct/exact position, business/economic/financial position', collocation_tr: 'Doğru/tam konum, iş/ekonomik/finansal durum' },
+            { headword: 'Presence', translation: 'Varlık, Mevcudiyet', verb: '', noun: 'presence', adjective: 'present', adverb: '', collocation: 'the presence of sb/sth, to be/remain present', collocation_tr: 'Birinin/bir şeyin varlığı, mevcut olmak/kalmak' },
+            { headword: 'Previous', translation: 'Önceki', verb: '', noun: '', adjective: 'previous', adverb: 'previously', collocation: '', collocation_tr: '' },
+            { headword: 'Primary', translation: 'Birincil, Temel', verb: '', noun: '', adjective: 'primary', adverb: 'primarily', collocation: 'primary responsibility, primary school', collocation_tr: 'Birincil sorumluluk, ilkokul' },
+            { headword: 'primitive', translation: 'İlkel', verb: '', noun: '', adjective: 'primitive', adverb: 'primitively', collocation: 'primitive tools/living conditions/society', collocation_tr: 'İlkel aletler/yaşam koşulları/toplum' },
+            { headword: 'Principle', translation: 'Prensip, İlke', verb: '', noun: 'principle', adjective: '', adverb: '', collocation: 'basic/central principle, to be against your principles', collocation_tr: 'Temel/merkezi ilke, prensiplerinize aykırı olmak' },
+            { headword: 'Profession', translation: 'Meslek', verb: '', noun: 'profession, professionalism', adjective: 'professional', adverb: 'professionally', collocation: 'medical/teaching profession, to lack professionalism', collocation_tr: 'Tıp/öğretmenlik mesleği, profesyonellikten yoksun olmak' },
+            { headword: 'Progress', translation: 'İlerleme', verb: 'progress', noun: 'progress, progression', adjective: 'progressive', adverb: 'progressively', collocation: 'to progress well/rapidly, to make slow/rapid progress', collocation_tr: 'İyi/hızlı ilerlemek, yavaş/hızlı ilerleme kaydetmek' },
+            { headword: 'Prohibit', translation: 'Yasaklamak', verb: 'Prohibit', noun: 'prohibition', adjective: 'prohibitory', adverb: '', collocation: 'prohibit from, impose, abolish, lift prohibitions', collocation_tr: '...den yasaklamak, yasak koymak, kaldırmak' },
+            { headword: 'Property', translation: 'Mülk, Eşya', verb: '', noun: 'property', adjective: '', adverb: '', collocation: 'private/public property', collocation_tr: 'Özel/kamu mülkü' },
+            { headword: 'pros and cons', translation: 'Artıları ve eksileri', verb: '', noun: 'pros and cons', adjective: '', adverb: '', collocation: 'pros and cons of sth', collocation_tr: 'Bir şeyin artıları ve eksileri' },
+            { headword: 'Prospect', translation: 'Olasılık, Umut', verb: '', noun: 'prospect', adjective: 'prospective', adverb: '', collocation: 'the prospect of sth, a prospective buyer', collocation_tr: 'Bir şeyin olasılığı, potansiyel bir alıcı' },
+            { headword: 'Punch', translation: 'Yumruk', verb: 'punch', noun: 'punch', adjective: '', adverb: '', collocation: 'to punch hard/lightly, to throw a powerful/knockout punch', collocation_tr: 'Sert/hafif yumruk atmak, güçlü/nakavt edici bir yumruk atmak' },
+            { headword: 'Punctual', translation: 'Dakik', verb: '', noun: 'punctuality', adjective: 'punctual', adverb: 'punctually', collocation: 'to be punctual', collocation_tr: 'Dakik olmak' },
+            { headword: 'Purchase', translation: 'Satın almak', verb: 'purchase', noun: 'purchase', adjective: '', adverb: '', collocation: 'to purchase sth, cash/credit purchase', collocation_tr: 'Bir şey satın almak, nakit/kredi ile satın alma' },
+            { headword: 'Pure', translation: 'Saf, Katkısız', verb: 'purify', noun: 'purity, purification', adjective: 'pure', adverb: 'purely', collocation: 'purity of voice, to purify water/the air', collocation_tr: 'Sesin saflığı, suyu/havayı arıtmak' },
+            { headword: 'Pursue', translation: 'Takip etmek, Peşinden gitmek', verb: 'pursue', noun: 'pursuit', adjective: '', adverb: '', collocation: 'to pursue a career in + a field, the pursuit of happiness', collocation_tr: 'Bir alanda kariyer yapmak, mutluluk arayışı' },
+            { headword: 'Qualify', translation: 'Nitelik kazanmak, Hak kazanmak', verb: 'qualify', noun: 'qualification, quality', adjective: 'qualified', adverb: '', collocation: 'to have/hold a qualification, to be qualified', collocation_tr: 'Bir niteliğe sahip olmak, nitelikli olmak' },
+            { headword: 'Quarrel', translation: 'Tartışmak, Kavga etmek', verb: 'quarrel', noun: 'quarrel', adjective: 'quarrelsome', adverb: '', collocation: 'to quarrel about/over sth, a serious/violent/family quarrel', collocation_tr: 'Bir şey hakkında tartışmak/kavga etmek, ciddi/şiddetli/aile kavgası' },
+            { headword: 'Quote', translation: 'Alıntı yapmak', verb: 'quote', noun: 'quotation', adjective: '', adverb: '', collocation: 'to take a quotation', collocation_tr: 'Bir alıntı yapmak' },
+            { headword: 'Range', translation: 'Aralık, Menzil', verb: 'range', noun: 'range', adjective: '', adverb: '', collocation: 'to range from X to Y, a wide range of sth', collocation_tr: 'X\'ten Y\'ye kadar değişmek, geniş bir yelpazede bir şey' },
+            { headword: 'Rapid', translation: 'Hızlı', verb: '', noun: '', adjective: 'rapid', adverb: 'rapidly', collocation: 'to be/seem rapid, rapid change/growth', collocation_tr: 'Hızlı olmak/görünmek, hızlı değişim/büyüme' },
+            { headword: 'Rarely', translation: 'Nadiren', verb: '', noun: '', adjective: 'rare', adverb: 'rarely', collocation: 'to be rare', collocation_tr: 'Nadir olmak' },
+            { headword: 'Rate', translation: 'Oran, Hız', verb: 'rate', noun: 'rate', adjective: '', adverb: '', collocation: 'to go at a tremendous rate', collocation_tr: 'Muazzam bir hızla gitmek' },
+            { headword: 'Razor', translation: 'Tıraş bıçağı', verb: '', noun: 'razor', adjective: '', adverb: '', collocation: 'electric razor, to shave with a razor', collocation_tr: 'Elektrikli tıraş makinesi, tıraş bıçağıyla tıraş olmak' },
+            { headword: 'Rear', translation: 'Arka', verb: '', noun: 'rear', adjective: 'rear', adverb: '', collocation: 'rear door/window', collocation_tr: 'Arka kapı/pencere' },
+            { headword: 'Recover', translation: 'İyileşmek', verb: 'recover', noun: 'recovery', adjective: '', adverb: '', collocation: 'to recover completely/fully/partially, to make a recovery', collocation_tr: 'Tamamen/kısmen iyileşmek, iyileşme göstermek' },
+            { headword: 'Reflect', translation: 'Yansıtmak', verb: 'reflect', noun: 'reflection', adjective: 'reflective', adverb: '', collocation: 'to reflect on sth, to gaze/stare at a reflection', collocation_tr: 'Bir şey üzerinde düşünmek, bir yansımaya bakmak/dik dik bakmak' },
+            { headword: 'refugee', translation: 'Mülteci', verb: '', noun: 'refugee', adjective: '', adverb: '', collocation: 'be a refugee, a refugee camp', collocation_tr: 'Mülteci olmak, bir mülteci kampı' },
+            { headword: 'Region', translation: 'Bölge', verb: '', noun: 'region', adjective: 'regional', adverb: 'regionally', collocation: 'a regional accent/dialect/newspaper', collocation_tr: 'Bölgesel bir aksan/lehçe/gazete' },
+            { headword: 'Regret', translation: 'Pişman olmak', verb: 'regret', noun: 'regret', adjective: 'regretful, regrettable', adverb: 'regretfully, regrettably', collocation: 'to regret doing sth, big/deep/great regret', collocation_tr: 'Bir şeyi yapmaktan pişman olmak, büyük/derin pişmanlık' },
+            { headword: 'Regulation', translation: 'Yönetmelik, Düzenleme', verb: 'regulate', noun: 'regulation, regulator', adjective: '', adverb: '', collocation: 'to regulate carefully/closely, strict/tight regulation', collocation_tr: 'Dikkatlice/yakından düzenlemek, sıkı düzenleme' },
+            { headword: 'Reject', translation: 'Reddetmek', verb: 'reject', noun: 'rejection', adjective: '', adverb: '', collocation: 'to reject firmly', collocation_tr: 'Kesin bir şekilde reddetmek' },
+            { headword: 'Release', translation: 'Serbest bırakmak', verb: 'release', noun: 'release', adjective: '', adverb: '', collocation: 'early release from prison', collocation_tr: 'Hapishaneden erken tahliye' },
+            { headword: 'Relevant / Irrelevant', translation: 'İlgili/İlgisiz', verb: '', noun: 'relevance, irrelevance', adjective: 'relevant, irrelevant', adverb: '', collocation: 'to have/lack/lose relevance to, be/seem/become relevant', collocation_tr: 'İle ilgisi olmak/olmamak, ilgili olmak/görünmek' },
+            { headword: 'Reliable / unreliable', translation: 'Güvenilir/Güvenilmez', verb: 'rely', noun: 'reliability', adjective: 'reliable, unreliable', adverb: 'reliably', collocation: 'to rely heavily/strongly on sth, to be very reliable', collocation_tr: 'Bir şeye büyük ölçüde/güçlü bir şekilde güvenmek, çok güvenilir olmak' },
+            { headword: 'Remain', translation: 'Kalmak', verb: 'remain', noun: 'remains', adjective: 'remaining', adverb: '', collocation: 'the remains of sth', collocation_tr: 'Bir şeyin kalıntıları' },
+            { headword: 'Remarkable', translation: 'Dikkat çekici', verb: '', noun: '', adjective: 'remarkable, unremarkable', adverb: 'remarkably', collocation: '', collocation_tr: '' },
+            { headword: 'Remedy', translation: 'Çare', verb: '', noun: 'remedy', adjective: '', adverb: '', collocation: 'an effective remedy for sth, to need/take remedy', collocation_tr: 'Bir şey için etkili bir çare, çareye ihtiyaç duymak/almak' },
+            { headword: 'Reproduce', translation: 'Üremek, Çoğaltmak', verb: 'reproduce', noun: 'reproduction', adjective: 'reproductory', adverb: '', collocation: 'reproductory organs', collocation_tr: 'Üreme organları' },
+            { headword: 'Reputation', translation: 'İtibar, Ün', verb: '', noun: 'reputation', adjective: 'reputable, disreputable', adverb: 'reputably', collocation: 'to have a worldwide reputation for sth, to have a good/bad reputation', collocation_tr: 'Bir şeyle dünya çapında bir üne sahip olmak, iyi/kötü bir üne sahip olmak' },
+            { headword: 'resemble', translation: 'Benzemek', verb: 'resemble', noun: 'resemblance', adjective: '', adverb: '', collocation: 'family/close/obvious resemblance between sbd and sbd, closely resemble', collocation_tr: 'Biriyle diğeri arasında aile/yakın/bariz benzerlik, yakından benzemek' },
+            { headword: 'resistant', translation: 'Dirençli', verb: 'resist', noun: 'resistance', adjective: 'resistant', adverb: '', collocation: 'be resistant to sth, couldn\'t resist sth', collocation_tr: 'Bir şeye dirençli olmak, bir şeye karşı koyamamak' },
+            { headword: 'Restore', translation: 'Onarmak, Geri getirmek', verb: 'restore', noun: 'restoration', adjective: '', adverb: '', collocation: 'to restore confidence, to restore antiques', collocation_tr: 'Güveni yeniden sağlamak, antika restore etmek' },
+            { headword: 'Reveal', translation: 'Ortaya çıkarmak', verb: 'reveal', noun: '', adjective: 'revealing', adverb: '', collocation: 'to reveal that + sentence, to be deeply/highly revealing', collocation_tr: '... olduğunu ortaya çıkarmak, derinden/çok aydınlatıcı olmak' },
+            { headword: 'Revenge', translation: 'İntikam', verb: '', noun: 'revenge', adjective: 'revengeful', adverb: '', collocation: 'to seek/want revenge, sweet revenge', collocation_tr: 'İntikam aramak/istemek, tatlı intikam' },
+            { headword: 'Revolution', translation: 'Devrim', verb: '', noun: 'revolution', adjective: 'revolutionary', adverb: '', collocation: 'to carry out/conduct revolution, successful/bloody/violent revolution', collocation_tr: 'Devrim yapmak, başarılı/kanlı/şiddetli devrim' },
+            { headword: 'Reward', translation: 'Ödül', verb: 'reward', noun: 'reward', adjective: 'rewarding', adverb: '', collocation: 'to reward generously/well for sth, to gain/get considerable reward', collocation_tr: 'Bir şey için cömertçe/iyi bir şekilde ödüllendirmek, önemli bir ödül kazanmak' },
+            { headword: 'Ripe', translation: 'Olgun', verb: '', noun: 'ripeness', adjective: 'ripe', adverb: '', collocation: 'to be/look/smell/taste ripe', collocation_tr: 'Olgun olmak/görünmek/kokmak/tatmak' },
+            { headword: 'Risk', translation: 'Risk', verb: 'risk', noun: 'risk', adjective: 'risky', adverb: '', collocation: 'to risk losing sth, to take a big/considerable/great/high risk', collocation_tr: 'Bir şeyi kaybetme riskini almak, büyük/önemli bir risk almak' },
+            { headword: 'Role', translation: 'Rol', verb: '', noun: 'role, role model', adjective: '', adverb: '', collocation: 'to have/play a central/crucial/key role', collocation_tr: 'Merkezi/kritik/anahtar bir rol oynamak' },
+            { headword: 'rotate', translation: 'Dönmek', verb: 'rotate', noun: 'rotation', adjective: '', adverb: '', collocation: 'rotate around sth, the rotation of the Earth, job rotation', collocation_tr: 'Bir şeyin etrafında dönmek, Dünya\'nın dönüşü, iş rotasyonu' },
+            { headword: 'Rotten', translation: 'Çürük', verb: '', noun: '', adjective: 'rotten', adverb: '', collocation: 'rotten fruit', collocation_tr: 'Çürük meyve' },
+            { headword: 'Rough', translation: 'Kaba, Pürüzlü', verb: '', noun: 'roughness', adjective: 'rough', adverb: 'roughly', collocation: '', collocation_tr: '' },
+            { headword: 'Rub', translation: 'Ovuşturmak', verb: 'rub', noun: 'rub', adjective: '', adverb: '', collocation: 'to rub hard', collocation_tr: 'Sertçe ovuşturmak' },
+            { headword: 'Ruin', translation: 'Mahvetmek, Harabe', verb: 'ruin', noun: 'ruin', adjective: 'ruined', adverb: '', collocation: 'to ruin completely/totally, ruined castle', collocation_tr: 'Tamamen mahvetmek, yıkık kale' },
+            { headword: 'Rule', translation: 'Kural, Yönetmek', verb: 'rule, misrule', noun: 'rule', adjective: '', adverb: '', collocation: 'to rule justly, to follow/observe/obey the rules', collocation_tr: 'Adil bir şekilde yönetmek, kurallara uymak' },
+            { headword: 'Rusty', translation: 'Paslı', verb: '', noun: 'rust', adjective: 'rusty', adverb: '', collocation: 'rusty nails', collocation_tr: 'Paslı çiviler' },
+            { headword: 'Sack', translation: 'Çuval, Kovmak', verb: 'sack', noun: 'sack', adjective: '', adverb: '', collocation: 'to get the sack', collocation_tr: 'Kovulmak' },
+            { headword: 'Sacred', translation: 'Kutsal', verb: '', noun: '', adjective: 'sacred', adverb: '', collocation: 'a sacred object', collocation_tr: 'Kutsal bir nesne' },
+            { headword: 'Sacrifice', translation: 'Kurban etmek, Fedakarlık', verb: 'sacrifice', noun: 'sacrifice', adjective: '', adverb: '', collocation: 'to make sacrifice, animal/human sacrifice', collocation_tr: 'Fedakarlık yapmak, hayvan/insan kurban etme' },
+            { headword: 'Sake', translation: 'Hatır', verb: '', noun: 'sake', adjective: '', adverb: '', collocation: 'for the sake of sb/sth, for sb\'s sake', collocation_tr: 'Birinin/bir şeyin hatırı için, birinin hatırı için' },
+            { headword: 'Sample', translation: 'Örnek, Numune', verb: '', noun: 'sample', adjective: '', adverb: '', collocation: 'a sample of sth', collocation_tr: 'Bir şeyden bir örnek' },
+            { headword: 'Satisfy', translation: 'Tatmin etmek', verb: 'satisfy', noun: 'satisfaction, dissatisfaction', adjective: 'satisfied, dissatisfied, satisfying, satisfactory', adverb: 'satisfactorily', collocation: 'to feel/gain/get satisfaction, to be/feel/appear satisfied', collocation_tr: 'Tatmin hissetmek/kazanmak, memnun olmak/hissetmek/görünmek' },
+            { headword: 'Saving', translation: 'Tasarruf', verb: 'save', noun: 'safety, saving, savings', adjective: 'safe', adverb: 'safely', collocation: 'to save money', collocation_tr: 'Para biriktirmek' },
+            { headword: 'Scale', translation: 'Ölçek', verb: '', noun: 'scale', adjective: '', adverb: '', collocation: 'a large-scale investigation', collocation_tr: 'Büyük ölçekli bir soruşturma' },
+            { headword: 'Scent', translation: 'Koku', verb: '', noun: 'scent', adjective: 'scented', adverb: '', collocation: 'to lose the scent', collocation_tr: 'İzi kaybetmek (kokuyu)' },
+            { headword: 'Sceptical / Skeptical', translation: 'Şüpheci', verb: '', noun: '', adjective: 'sceptical, skeptical', adverb: 'sceptically, skeptically', collocation: 'be highly/deeply sceptical about something, have a sceptical attitude towards something', collocation_tr: 'Bir şey hakkında son derece/derinden şüpheci olmak, bir şeye karşı şüpheci bir tutuma sahip olmak' },
+            { headword: 'Secretary (of state)', translation: 'Sekreter (devlet)', verb: '', noun: 'secretary', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Secure / Insecure', translation: 'Güvenli/Güvensiz', verb: '', noun: 'security', adjective: 'secure, insecure', adverb: 'securely', collocation: 'security measures/precautions, national security', collocation_tr: 'Güvenlik önlemleri/tedbirleri, ulusal güvenlik' },
+            { headword: 'segment', translation: 'Bölüm, Kesim', verb: '', noun: 'segment', adjective: '', adverb: '', collocation: 'segment of the population', collocation_tr: 'Nüfusun bir kesimi' },
+            { headword: 'Seldom', translation: 'Nadiren, Seyrek', verb: '', noun: '', adjective: '', adverb: 'seldom', collocation: '', collocation_tr: '' },
+            { headword: 'Select', translation: 'Seçmek', verb: 'select', noun: 'selection', adjective: 'selective', adverb: '', collocation: 'to select carefully, to be very/extremely selective', collocation_tr: 'Dikkatlice seçmek, çok/son derece seçici olmak' },
+            { headword: 'semi', translation: 'Yarı', verb: '', noun: '', adjective: 'semi', adverb: '', collocation: 'semi-final, semi-detached, semi-professional', collocation_tr: 'Yarı final, yarı müstakil, yarı profesyonel' },
+            { headword: 'Sensitive', translation: 'Hassas, Duyarlı', verb: '', noun: '', adjective: 'sensitive, insensitive', adverb: 'sensitively', collocation: 'to be/become sensitive, deeply/extremely/highly sensitive', collocation_tr: 'Hassas olmak/haline gelmek, derinden/son derece/çok hassas' },
+            { headword: 'sensory', translation: 'Duyusal', verb: '', noun: '', adjective: 'sensory', adverb: '', collocation: 'sensory problems/systems', collocation_tr: 'Duyusal problemler/sistemler' },
+            { headword: 'Servant', translation: 'Hizmetçi', verb: '', noun: 'servant', adjective: '', adverb: '', collocation: 'to have/employ a servant, devoted/faithful servant', collocation_tr: 'Bir hizmetçiye sahip olmak/çalıştırmak, sadık/vefalı hizmetçi' },
+            { headword: 'Shame', translation: 'Utanç', verb: '', noun: 'shame', adjective: 'shameful, shameless', adverb: 'shamefully, shamelessly', collocation: 'to be filled with shame, to be shameful/shameless', collocation_tr: 'Utançla dolmak, utanç verici/utanmaz olmak' },
+            { headword: 'shareholder', translation: 'Hissedar', verb: '', noun: 'shareholder', adjective: '', adverb: '', collocation: 'shareholder of a company', collocation_tr: 'Bir şirketin hissedarı' },
+            { headword: 'Shell', translation: 'Kabuk', verb: '', noun: 'shell', adjective: '', adverb: '', collocation: 'sea shell', collocation_tr: 'Deniz kabuğu' },
+            { headword: 'Silk', translation: 'İpek', verb: '', noun: 'silk', adjective: '', adverb: '', collocation: 'silk dress/shirt', collocation_tr: 'İpek elbise/gömlek' },
+            { headword: 'Silver', translation: 'Gümüş', verb: '', noun: 'silver', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Simply', translation: 'Basitçe', verb: 'simplify', noun: 'simplification', adjective: 'simple', adverb: 'simply', collocation: '', collocation_tr: '' },
+            { headword: 'Slide', translation: 'Kaymak, Slayt', verb: 'slide', noun: 'slide', adjective: '', adverb: '', collocation: 'to show slide, to slide slowly/easily', collocation_tr: 'Slayt göstermek, yavaşça/kolayca kaymak' },
+            { headword: 'Slope', translation: 'Eğim, Yokuş', verb: '', noun: 'slope', adjective: '', adverb: '', collocation: 'a steep slope', collocation_tr: 'Dik bir yokuş' },
+            { headword: 'Smash', translation: 'Parçalamak', verb: 'smash', noun: 'smash', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Smooth', translation: 'Pürüzsüz', verb: '', noun: 'smoothness', adjective: 'smooth', adverb: 'smoothly', collocation: 'to be/feel/look smooth', collocation_tr: 'Pürüzsüz olmak/hissetmek/görünmek' },
+            { headword: 'Somewhat', translation: 'Biraz', verb: '', noun: '', adjective: '', adverb: 'somewhat', collocation: '', collocation_tr: '' },
+            { headword: 'Source', translation: 'Kaynak', verb: '', noun: 'source', adjective: '', adverb: '', collocation: 'the source of income/information', collocation_tr: 'Gelir/bilgi kaynağı' },
+            { headword: 'Southern', translation: 'Güney', verb: '', noun: 'south', adjective: 'southern', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Spare', translation: 'Yedek', verb: '', noun: 'spare', adjective: 'spare', adverb: '', collocation: 'spare parts', collocation_tr: 'Yedek parçalar' },
+            { headword: 'Speciality', translation: 'Uzmanlık alanı', verb: 'specialize', noun: 'speciality', adjective: 'specialized', adverb: '', collocation: 'to specialize in sth, local/regional speciality', collocation_tr: 'Bir şeyde uzmanlaşmak, yerel/bölgesel uzmanlık' },
+            { headword: 'Specify', translation: 'Belirtmek', verb: 'specify', noun: 'specification', adjective: '', adverb: 'specifically', collocation: 'to specify clearly/fully', collocation_tr: 'Açıkça/tam olarak belirtmek' },
+            { headword: 'Spicy', translation: 'Baharatlı', verb: '', noun: 'spice', adjective: 'spicy', adverb: '', collocation: 'to be/smell/taste spicy, to be very/mildly/quite spicy', collocation_tr: 'Baharatlı olmak/kokmak/tatmak, çok/hafif/oldukça baharatlı olmak' },
+            { headword: 'Spirit', translation: 'Ruh', verb: '', noun: 'spirit', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Spoil', translation: 'Bozmak, Şımartmak', verb: 'spoil', noun: '', adjective: 'spoiled', adverb: '', collocation: 'to spoil completely, to spoil a child', collocation_tr: 'Tamamen bozmak, bir çocuğu şımartmak' },
+            { headword: 'sponsor', translation: 'Sponsor olmak', verb: 'sponsor', noun: 'sponsor, sponsorship', adjective: '', adverb: '', collocation: 'major sponsor, a sponsor for sth', collocation_tr: 'Ana sponsor, bir şey için bir sponsor' },
+            { headword: 'Spray', translation: 'Sprey', verb: 'spray', noun: 'spray, sprayer', adjective: '', adverb: '', collocation: 'hair spray', collocation_tr: 'Saç spreyi' },
+            { headword: 'Stain', translation: 'Leke', verb: 'stain', noun: 'stain', adjective: 'stainless', adverb: '', collocation: 'to be badly/heavily/slightly stained, stainless steel', collocation_tr: 'Kötü/ağır/hafif lekeli olmak, paslanmaz çelik' },
+            { headword: 'starve', translation: 'Açlıktan ölmek', verb: 'starve', noun: 'starvation', adjective: '', adverb: '', collocation: 'starve to death, face starvation/die of starvation', collocation_tr: 'Açlıktan ölmek, açlıkla yüzleşmek/açlıktan ölmek' },
+            { headword: 'State', translation: 'Durum, Belirtmek', verb: 'state', noun: 'state, statement', adjective: '', adverb: '', collocation: 'to state clearly/exactly, to be in a state of shock', collocation_tr: 'Açıkça/kesin olarak belirtmek, şok durumunda olmak' },
+            { headword: 'Statue', translation: 'Heykel', verb: '', noun: 'statue', adjective: '', adverb: '', collocation: 'la statue of sth', collocation_tr: 'Bir şeyin heykeli' },
+            { headword: 'Steady / unsteady', translation: 'İstikrarlı/İstikrarsız', verb: '', noun: 'steadiness', adjective: 'steady, unsteady', adverb: '', collocation: 'to be/seem steady, remarkably/very steady', collocation_tr: 'İstikrarlı olmak/görünmek, dikkat çekici/çok istikrarlı' },
+            { headword: 'Steam', translation: 'Buhar', verb: 'steam', noun: 'steam', adjective: 'steaming', adverb: '', collocation: 'to generate/produce steam', collocation_tr: 'Buhar üretmek' },
+            { headword: 'Steel', translation: 'Çelik', verb: '', noun: 'steel', adjective: '', adverb: '', collocation: 'stainless steel, to produce/manufacture steel', collocation_tr: 'Paslanmaz çelik, çelik üretmek/imal etmek' },
+            { headword: 'Steep', translation: 'Dik', verb: '', noun: 'steepness', adjective: 'steep', adverb: 'steeply', collocation: 'steep hill, to be/look steep', collocation_tr: 'Dik tepe, dik olmak/görünmek' },
+            { headword: 'Steer', translation: 'Yönlendirmek, Dümen kullanmak', verb: 'steer', noun: '', adjective: '', adverb: '', collocation: 'to steer a car', collocation_tr: 'Araba kullanmak' },
+            { headword: 'Step', translation: 'Adım', verb: 'step', noun: 'step', adjective: '', adverb: '', collocation: 'to make/take/follow a step, big/considerable/huge/small step', collocation_tr: 'Bir adım atmak/takip etmek, büyük/önemli/küçük adım' },
+            { headword: 'Stocks', translation: 'Stoklar, Hisse senetleri', verb: 'stock', noun: 'stocks', adjective: '', adverb: '', collocation: 'to be stocked plentifully/well/fully', collocation_tr: 'Bolca/iyi/tamamen stoklanmış olmak' },
+            { headword: 'Stone', translation: 'Taş', verb: '', noun: 'stone', adjective: '', adverb: '', collocation: 'heavy/hard stone, precious stone', collocation_tr: 'Ağır/sert taş, değerli taş' },
+            { headword: 'Straightforward', translation: 'Basit, Anlaşılır', verb: '', noun: '', adjective: 'straightforward', adverb: '', collocation: 'to be/look straightforward', collocation_tr: 'Basit/anlaşılır olmak/görünmek' },
+            { headword: 'Strain', translation: 'Gerginlik, Zorlanma', verb: 'strain', noun: 'strain', adjective: 'strained', adverb: '', collocation: 'to strain hard, be/feel strained', collocation_tr: 'Çok zorlamak, gergin olmak/hissetmek' },
+            { headword: 'Stranger', translation: 'Yabancı', verb: '', noun: 'stranger', adjective: 'strange', adverb: 'strangely', collocation: 'to be/feel/seem strange, complete stranger', collocation_tr: 'Garip olmak/hissetmek/görünmek, tamamen yabancı' },
+            { headword: 'Strategy', translation: 'Strateji', verb: '', noun: 'strategy', adjective: 'strategic', adverb: 'strategically', collocation: 'effective/good/successful strategy, strategic planning', collocation_tr: 'Etkili/iyi/başarılı strateji, stratejik planlama' },
+            { headword: 'Stream', translation: 'Akarsu, Yayın', verb: 'stream', noun: 'stream', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Strike', translation: 'Vurmak, Grev', verb: 'strike', noun: 'strike', adjective: 'striking', adverb: '', collocation: 'to strike hard/firmly, to go on strike', collocation_tr: 'Sert/sıkı vurmak, greve gitmek' },
+            { headword: 'Stroke', translation: 'Felç, Vuruş', verb: '', noun: 'stroke', adjective: '', adverb: '', collocation: 'to have/suffer a stroke, serious/minor/fatal stroke', collocation_tr: 'Felç geçirmek, ciddi/küçük/ölümcül felç' },
+            { headword: 'Struggle', translation: 'Mücadele etmek', verb: 'struggle', noun: 'struggle', adjective: '', adverb: '', collocation: 'to struggle with sth, to struggle desperately/hard', collocation_tr: 'Bir şeyle mücadele etmek, umutsuzca/sıkı bir şekilde mücadele etmek' },
+            { headword: 'Studio', translation: 'Stüdyo', verb: '', noun: 'studio', adjective: '', adverb: '', collocation: 'a recording studio', collocation_tr: 'Bir kayıt stüdyosu' },
+            { headword: 'subjective', translation: 'Öznel', verb: '', noun: '', adjective: 'subjective', adverb: '', collocation: 'a subjective idea', collocation_tr: 'Öznel bir fikir' },
+            { headword: 'Submit', translation: 'Sunmak, Teslim etmek', verb: 'submit', noun: 'submission', adjective: '', adverb: '', collocation: 'to submit formally, complete/total submission', collocation_tr: 'Resmi olarak sunmak, tam/bütün teslimiyet' },
+            { headword: 'Substitute', translation: 'Yedek, Yerine geçmek', verb: 'substitute', noun: 'substitute', adjective: '', adverb: '', collocation: 'a substitute teacher, to substitute for sth', collocation_tr: 'Yedek öğretmen, bir şeyin yerine geçmek' },
+            { headword: 'subtract', translation: 'Çıkarmak (mat)', verb: 'subtract', noun: 'subtraction', adjective: '', adverb: '', collocation: 'subtract sth from sth', collocation_tr: 'Bir şeyden bir şeyi çıkarmak' },
+            { headword: 'Suitable', translation: 'Uygun', verb: 'suit', noun: '', adjective: 'suitable', adverb: 'suitably', collocation: 'to suit fine/well, suitable for sb', collocation_tr: 'İyi/uygun olmak, biri için uygun' },
+            { headword: 'Survey', translation: 'Anket', verb: 'survey', noun: 'survey', adjective: '', adverb: '', collocation: 'to carry out/conduct a survey, detailed/extensive survey', collocation_tr: 'Anket yapmak, detaylı/kapsamlı anket' },
+            { headword: 'Suspect', translation: 'Şüphelenmek, Şüpheli', verb: 'suspect', noun: 'suspicion, suspect', adjective: 'suspicious', adverb: 'suspiciously', collocation: 'to suspect that + sentence, the prime suspect', collocation_tr: '...olduğundan şüphelenmek, baş şüpheli' },
+            { headword: 'Sustain', translation: 'Sürdürmek', verb: 'sustain', noun: 'sustainability', adjective: 'sustainable', adverb: '', collocation: 'environmentally sustainable', collocation_tr: 'Çevresel olarak sürdürülebilir' },
+            { headword: 'Swallow', translation: 'Yutmak', verb: 'swallow', noun: '', adjective: '', adverb: '', collocation: 'swallow quickly/accidentally', collocation_tr: 'Hızlıca/yanlışlıkla yutmak' },
+            { headword: 'swap', translation: 'Değiş tokuş etmek', verb: 'swap', noun: '', adjective: '', adverb: '', collocation: 'swap places', collocation_tr: 'Yer değiştirmek' },
+            { headword: 'Swear', translation: 'Yemin etmek, Küfretmek', verb: 'swear', noun: 'swear word', adjective: '', adverb: '', collocation: 'to swear at sb, to use a swear word', collocation_tr: 'Birine küfretmek, küfür kullanmak' },
+            { headword: 'Sweat', translation: 'Ter, Terlemek', verb: 'sweat', noun: 'sweat, sweats, sweatshirt, sweater', adjective: 'sweaty', adverb: '', collocation: 'sweat a lot/heavily, heavy/cold sweat', collocation_tr: 'Çok/yoğun bir şekilde terlemek, yoğun/soğuk ter' },
+            { headword: 'Sweep', translation: 'Süpürmek', verb: 'sweep', noun: '', adjective: '', adverb: '', collocation: 'sweep up', collocation_tr: 'Süpürmek' },
+            { headword: 'Sweet', translation: 'Tatlı', verb: 'sweeten', noun: 'sweetness, sweetener', adjective: 'sweet', adverb: '', collocation: 'to be/smell/taste sweet, to be very/extremely sweet', collocation_tr: 'Tatlı olmak/kokmak/tadında olmak, çok/son derece tatlı olmak' },
+            { headword: 'Switch', translation: 'Değiştirmek, Düğme', verb: 'switch', noun: 'switch', adjective: '', adverb: '', collocation: 'to switch easily/readily, a sudden/immediate switch', collocation_tr: 'Kolayca/hazır bir şekilde değiştirmek, ani bir değişiklik' },
+            { headword: 'Sympathy', translation: 'Sempati, Anlayış', verb: 'sympathize', noun: 'sympathy', adjective: 'sympathetic', adverb: 'sympathetically', collocation: 'to feel/have/express sympathy, deep/great/genuine sympathy', collocation_tr: 'Sempati duymak/ifade etmek, derin/büyük/gerçek sempati' },
+            { headword: 'Tail', translation: 'Kuyruk', verb: '', noun: 'tail', adjective: '', adverb: '', collocation: 'long/short tail, to wag/wave tail', collocation_tr: 'Uzun/kısa kuyruk, kuyruk sallamak' },
+            { headword: 'Target', translation: 'Hedef', verb: 'target', noun: 'target', adjective: '', adverb: '', collocation: 'to target carefully/deliberately/particularly, to aim at a target', collocation_tr: 'Dikkatlice/kasıtlı olarak hedeflemek, bir hedefi nişan almak' },
+            { headword: 'Taste', translation: 'Tat, Tadına bakmak', verb: 'taste', noun: 'taste', adjective: 'tasty, tasteless, tasteful', adverb: 'tastefully', collocation: 'to taste strongly/slightly, to have a distinctive/pleasant/refreshing taste', collocation_tr: 'Güçlü/hafif bir tadı olmak, belirgin/hoş/ferahlatıcı bir tada sahip olmak' },
+            { headword: 'Tear', translation: 'Gözyaşı, Yırtmak', verb: 'tear', noun: 'tear', adjective: 'tearful', adverb: 'tearfully', collocation: 'to tear badly/easily, to burst into tears', collocation_tr: 'Kötü/kolayca yırtmak, gözyaşlarına boğulmak' },
+            { headword: 'Technique', translation: 'Teknik', verb: '', noun: 'technique', adjective: 'technical', adverb: 'technically', collocation: 'to have a technique, effective/successful/simple technique', collocation_tr: 'Bir tekniğe sahip olmak, etkili/başarılı/basit teknik' },
+            { headword: 'Temper', translation: 'Mizaç, Öfke', verb: '', noun: 'temper', adjective: 'bad-tempered', adverb: '', collocation: 'a bad temper, to have/control/lose temper', collocation_tr: 'Kötü bir mizaç, öfkeye sahip olmak/kontrol etmek/kaybetmek' },
+            { headword: 'Temporary', translation: 'Geçici', verb: '', noun: '', adjective: 'temporary', adverb: 'temporarily', collocation: 'a temporary job, temporary housing', collocation_tr: 'Geçici bir iş, geçici konut' },
+            { headword: 'Tendency', translation: 'Eğilim', verb: 'tend', noun: 'tendency', adjective: '', adverb: '', collocation: 'to tend to do sth, to have a tendency to do sth', collocation_tr: 'Bir şey yapma eğiliminde olmak, bir şey yapma eğilimine sahip olmak' },
+            { headword: 'Tender', translation: 'Hassas, Yumuşak', verb: '', noun: 'tenderness', adjective: 'tender', adverb: '', collocation: 'a tender kiss/look, to feel/show tenderness', collocation_tr: 'Hassas bir öpücük/bakış, hassasiyet hissetmek/göstermek' },
+            { headword: 'Terminal', translation: 'Terminal, Ölümcül', verb: '', noun: '', adjective: 'terminal', adverb: 'terminally', collocation: 'terminal cancer, terminally ill', collocation_tr: 'Ölümcül kanser, ölümcül hasta' },
+            { headword: 'Thanks to', translation: 'Sayesinde', verb: '', noun: '', adjective: '', adverb: '', collocation: 'thanks to somebody/something', collocation_tr: 'Birinin/bir şeyin sayesinde' },
+            { headword: 'Thesis', translation: 'Tez', verb: '', noun: 'thesis', adjective: '', adverb: '', collocation: 'to work on/write a thesis', collocation_tr: 'Bir tez üzerinde çalışmak/yazmak' },
+            { headword: 'Thirst', translation: 'Susuzluk', verb: '', noun: 'thirst', adjective: 'thirsty', adverb: 'thirstily', collocation: 'a thirst for sth, to quench your thirst', collocation_tr: 'Bir şeye duyulan susuzluk, susuzluğunu gidermek' },
+            { headword: 'Thorough', translation: 'Kapsamlı, Detaylı', verb: '', noun: '', adjective: 'thorough', adverb: 'thoroughly', collocation: 'a thorough investigation', collocation_tr: 'Kapsamlı bir soruşturma' },
+            { headword: 'Threat', translation: 'Tehdit', verb: 'Threaten', noun: 'threat', adjective: 'Threatening', adverb: '', collocation: 'threaten to do something, pose a threat', collocation_tr: 'Bir şey yapmakla tehdit etmek, bir tehdit oluşturmak' },
+            { headword: 'Throughout', translation: 'Boyunca', verb: '', noun: '', adjective: '', adverb: 'throughout', collocation: '', collocation_tr: '' },
+            { headword: 'Tide', translation: 'Gelgit', verb: '', noun: 'tide', adjective: '', adverb: '', collocation: 'high/low tide', collocation_tr: 'Yüksek/alçak gelgit' },
+            { headword: 'Tin', translation: 'Teneke', verb: '', noun: 'tin, tin opener', adjective: '', adverb: '', collocation: 'a biscuit/paint tin, a tin of beans/soup', collocation_tr: 'Bir bisküvi/boya kutusu, bir konserve fasulye/çorba' },
+            { headword: 'Tone', translation: 'Ton', verb: '', noun: 'tone', adjective: '', adverb: '', collocation: 'the tone of the author', collocation_tr: 'Yazarın tonu' },
+            { headword: 'Tornado', translation: 'Tornado, Hortum', verb: '', noun: 'tornado', adjective: '', adverb: '', collocation: 'like a tornado', collocation_tr: 'Bir hortum gibi' },
+            { headword: 'Track', translation: 'İz, Takip etmek', verb: 'track', noun: 'track', adjective: '', adverb: '', collocation: 'be on the track of sb/sth, track smth/sb down', collocation_tr: 'Birinin/bir şeyin izinde olmak, bir şeyi/birini bulmak' },
+            { headword: 'Transfer', translation: 'Transfer etmek', verb: 'transfer', noun: 'transfer', adjective: '', adverb: '', collocation: 'to transfer sth from X to Y, a massive/successful transfer', collocation_tr: 'Bir şeyi X\'ten Y\'ye transfer etmek, büyük/başarılı bir transfer' },
+            { headword: 'Transform', translation: 'Dönüştürmek', verb: 'transform', noun: 'transformation', adjective: '', adverb: '', collocation: 'to undergo a dramatic/amazing transformation', collocation_tr: 'Dramatik/şaşırtıcı bir dönüşüm geçirmek' },
+            { headword: 'Transparent', translation: 'Şeffaf', verb: '', noun: 'transparency', adjective: 'transparent', adverb: '', collocation: 'to be/look transparent, transparent plastic', collocation_tr: 'Şeffaf olmak/görünmek, şeffaf plastik' },
+            { headword: 'Tray', translation: 'Tepsi', verb: '', noun: 'tray', adjective: '', adverb: '', collocation: 'tea tray, food tray', collocation_tr: 'Çay tepsisi, yemek tepsisi' },
+            { headword: 'Treasure', translation: 'Hazine', verb: '', noun: 'treasure', adjective: '', adverb: '', collocation: 'buried treasure', collocation_tr: 'Gömülü hazine' },
+            { headword: 'tremendous', translation: 'Muazzam', verb: '', noun: '', adjective: 'tremendous', adverb: 'tremendously', collocation: 'tremendous amount of sth, tremendous help/achievement', collocation_tr: 'Muazzam miktarda bir şey, muazzam yardım/başarı' },
+            { headword: 'Trial', translation: 'Duruşma, Deneme', verb: '', noun: 'trial', adjective: 'triangular', adverb: '', collocation: 'fair trial, to bring sb to trial, trial and error', collocation_tr: 'Adil yargılama, birini mahkemeye çıkarmak, deneme yanılma' },
+            { headword: 'Triangle', translation: 'Üçgen', verb: '', noun: 'triangle', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Trunk', translation: 'Gövde, Bagaj', verb: '', noun: 'trunk', adjective: '', adverb: '', collocation: 'tree trunk, the trunk of a car', collocation_tr: 'Ağaç gövdesi, arabanın bagajı' },
+            { headword: 'Trust', translation: 'Güvenmek', verb: 'trust', noun: 'trust', adjective: 'trustworthy', adverb: '', collocation: 'to trust completely, to be trustworthy', collocation_tr: 'Tamamen güvenmek, güvenilir olmak' },
+            { headword: 'Tuition', translation: 'Öğrenim ücreti', verb: '', noun: 'tuition', adjective: '', adverb: '', collocation: 'afford/pay the tuition, school tuition', collocation_tr: 'Öğrenim ücretini karşılamak/ödemek, okul öğrenim ücreti' },
+            { headword: 'Typical', translation: 'Tipik', verb: '', noun: '', adjective: 'typical', adverb: 'typically', collocation: 'to be typical of sb', collocation_tr: 'Birinin tipik özelliği olmak' },
+            { headword: 'Ultimate', translation: 'Nihai, Son', verb: '', noun: '', adjective: 'ultimate', adverb: 'ultimately', collocation: 'the ultimate aim/solution', collocation_tr: 'Nihai amaç/çözüm' },
+            { headword: 'Uncover / cover', translation: 'Ortaya çıkarmak/Örtmek', verb: 'uncover, cover', noun: '', adjective: '', adverb: '', collocation: 'to uncover evidence', collocation_tr: 'Kanıtları ortaya çıkarmak' },
+            { headword: 'Underneath', translation: 'Altında', verb: '', noun: '', adjective: '', adverb: 'underneath', collocation: '', collocation_tr: '' },
+            { headword: 'Undo', translation: 'Geri almak', verb: 'undo', noun: '', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Unforgettable', translation: 'Unutulmaz', verb: 'forget', noun: '', adjective: 'unforgettable, forgettable', adverb: '', collocation: 'to be truly unforgettable', collocation_tr: 'Gerçekten unutulmaz olmak' },
+            { headword: 'unintelligible', translation: 'Anlaşılmaz', verb: '', noun: '', adjective: 'unintelligible, intelligible', adverb: 'intelligibly', collocation: 'intelligible handwrting&speech', collocation_tr: 'Anlaşılır el yazısı ve konuşma' },
+            { headword: 'Union', translation: 'Birlik', verb: '', noun: 'union', adjective: '', adverb: '', collocation: 'The European Union', collocation_tr: 'Avrupa Birliği' },
+            { headword: 'Unique', translation: 'Eşsiz, Benzersiz', verb: '', noun: 'uniqueness', adjective: 'unique', adverb: 'uniquely', collocation: 'a unique opportunity, to be unique to sth', collocation_tr: 'Eşsiz bir fırsat, bir şeye özgü olmak' },
+            { headword: 'Unlikely', translation: 'Olası olmayan', verb: '', noun: '', adjective: 'likely, unlikely', adverb: '', collocation: 'to be (un)likely to do sth, It\'s likely that + sentence', collocation_tr: 'Bir şeyi yapma olasılığı (olmamak), ... olması muhtemel' },
+            { headword: 'Unpredictable', translation: 'Tahmin edilemez', verb: 'predict', noun: 'prediction', adjective: 'predictable, unpredictable', adverb: '', collocation: 'to predict accurately/successfully, be/seem predictable', collocation_tr: 'Doğru/başarılı bir şekilde tahmin etmek, tahmin edilebilir olmak/görünmek' },
+            { headword: 'Unsuitable', translation: 'Uygun olmayan', verb: '', noun: '', adjective: 'suitable, unsuitable', adverb: 'suitably', collocation: 'to be suitable for sb, to be suitably dressed', collocation_tr: 'Biri için uygun olmak, uygun bir şekilde giyinmiş olmak' },
+            { headword: 'Unsure', translation: 'Emin olmayan', verb: '', noun: '', adjective: 'sure, unsure', adverb: 'surely', collocation: 'to be sure that + sentence, to be unsure about sth', collocation_tr: '... olduğundan emin olmak, bir şeyden emin olmamak' },
+            { headword: 'Unwanted', translation: 'İstenmeyen', verb: 'want', noun: '', adjective: 'unwanted, wanted', adverb: '', collocation: 'to want badly/desperately', collocation_tr: 'Çok/umutsuzca istemek' },
+            { headword: 'Upright', translation: 'Dik', verb: '', noun: '', adjective: 'upright', adverb: 'upright', collocation: 'to sit/stand upright', collocation_tr: 'Dik oturmak/durmak' },
+            { headword: 'Upside (down)', translation: 'Tepetaklak', verb: '', noun: '', adjective: 'upside down', adverb: 'upside down', collocation: 'to turn sth upside down', collocation_tr: 'Bir şeyi tepetaklak etmek' },
+            { headword: 'Urgent', translation: 'Acil', verb: '', noun: 'urgency', adjective: 'urgent', adverb: 'urgently', collocation: 'a matter of great urgency, an urgent message', collocation_tr: 'Büyük aciliyet meselesi, acil bir mesaj' },
+            { headword: 'Valid', translation: 'Geçerli', verb: '', noun: '', adjective: 'valid, invalid', adverb: '', collocation: 'a valid argument', collocation_tr: 'Geçerli bir argüman' },
+            { headword: 'Various', translation: 'Çeşitli', verb: 'vary', noun: 'variety, variability', adjective: 'various', adverb: 'variously', collocation: 'to vary widely, great/huge variety', collocation_tr: 'Geniş ölçüde değişmek, büyük çeşitlilik' },
+            { headword: 'verbal', translation: 'Sözlü', verb: '', noun: '', adjective: 'verbal', adverb: '', collocation: 'verbal abuse/agreement', collocation_tr: 'Sözlü taciz/anlaşma' },
+            { headword: 'Victim', translation: 'Kurban', verb: '', noun: 'victim', adjective: '', adverb: '', collocation: 'helpless/innocent victim', collocation_tr: 'Çaresiz/masum kurban' },
+            { headword: 'Victory', translation: 'Zafer', verb: '', noun: 'victory', adjective: 'victorious', adverb: '', collocation: 'famous/glorious/historic victory, a victorious army', collocation_tr: 'Ünlü/şanlı/tarihi zafer, muzaffer bir ordu' },
+            { headword: 'Visible', translation: 'Görünür', verb: '', noun: 'visibility, invisibility', adjective: 'visible, invisible', adverb: 'visibly, invisibly', collocation: 'clear/good/excellent visibility, to be barely/hardly visible', collocation_tr: 'Açık/iyi/mükemmel görünürlük, zar zor görünür olmak' },
+            { headword: 'Volume', translation: 'Hacim, Ses seviyesi', verb: '', noun: 'volume', adjective: '', adverb: '', collocation: 'volume of sth', collocation_tr: 'Bir şeyin hacmi' },
+            { headword: 'Volunteer', translation: 'Gönüllü', verb: 'volunteer', noun: 'volunteer', adjective: 'voluntary', adverb: 'voluntarily', collocation: 'to volunteer to do sth, unpaid volunteer', collocation_tr: 'Bir şeyi yapmaya gönüllü olmak, ücretsiz gönüllü' },
+            { headword: 'Vote', translation: 'Oy vermek', verb: 'vote', noun: 'vote, voter', adjective: '', adverb: '', collocation: 'to vote against, to vote for sb', collocation_tr: 'Karşı oy kullanmak, birine oy vermek' },
+            { headword: 'Wander', translation: 'Dolaşmak', verb: 'wander', noun: 'wander, wanderer', adjective: '', adverb: '', collocation: 'to wander slowly/aimlessly', collocation_tr: 'Yavaşça/amaçsızca dolaşmak' },
+            { headword: 'Warn', translation: 'Uyarmak', verb: 'warn', noun: 'warning', adjective: '', adverb: '', collocation: 'to warn clearly/firmly, to give (sb) a strong warning', collocation_tr: 'Açıkça/kesin bir şekilde uyarmak, (birine) güçlü bir uyarıda bulunmak' },
+            { headword: 'Wealth', translation: 'Servet, Zenginlik', verb: '', noun: 'wealth', adjective: 'wealthy', adverb: '', collocation: 'to have/possess wealth, to be/look wealthy', collocation_tr: 'Servete sahip olmak, zengin olmak/görünmek' },
+            { headword: 'Weapon', translation: 'Silah', verb: '', noun: 'weapon', adjective: '', adverb: '', collocation: 'a lethal/powerful weapon, to be armed with a weapon', collocation_tr: 'Öldürücü/güçlü bir silah, silahlı olmak' },
+            { headword: 'Welfare', translation: 'Refah', verb: '', noun: 'welfare', adjective: '', adverb: '', collocation: 'to promote/improve welfare, child/community welfare', collocation_tr: 'Refahı teşvik etmek/iyileştirmek, çocuk/toplum refahı' },
+            { headword: 'Western', translation: 'Batı', verb: '', noun: 'west', adjective: 'western', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Wheat', translation: 'Buğday', verb: '', noun: 'wheat', adjective: '', adverb: '', collocation: 'to grow wheat', collocation_tr: 'Buğday yetiştirmek' },
+            { headword: 'Whistle', translation: 'Islık çalmak, Düdük', verb: 'whistle', noun: 'whistle', adjective: '', adverb: '', collocation: 'to whistle softly/cheerfully, to blow whistle', collocation_tr: 'Yavaşça/neşeyle ıslık çalmak, düdük çalmak' },
+            { headword: 'Willing/Unwilling', translation: 'İstekli/İsteksiz', verb: '', noun: 'willingness, unwillingness', adjective: 'willing, unwilling', adverb: 'willingly, unwillingly', collocation: 'to show/express willingness, to be (un)willing to do sth', collocation_tr: 'İsteklilik göstermek/ifade etmek, bir şeyi yapmaya (is)teksiz olmak' },
+            { headword: 'Wipe', translation: 'Silmek', verb: 'wipe', noun: '', adjective: '', adverb: '', collocation: 'to wipe out sth', collocation_tr: 'Bir şeyi yok etmek' },
+            { headword: 'Wire', translation: 'Tel, Kablo', verb: 'wire', noun: 'wire', adjective: 'wireless', adverb: '', collocation: 'to wire properly, electrical wire', collocation_tr: 'Düzgün bir şekilde kablolamak, elektrik teli' },
+            { headword: 'Wisdom', translation: 'Bilgelik', verb: '', noun: 'wisdom', adjective: 'wise, unwise', adverb: 'wisely', collocation: 'deep/great wisdom, to be/look wise', collocation_tr: 'Derin/büyük bilgelik, bilge olmak/görünmek' },
+            { headword: 'Withdraw', translation: 'Geri çekmek', verb: 'withdraw', noun: 'withdrawal', adjective: '', adverb: '', collocation: '', collocation_tr: '' },
+            { headword: 'Witness', translation: 'Tanık, Tanık olmak', verb: 'witness', noun: 'witness', adjective: '', adverb: '', collocation: 'to witness sth, crucial/key eyewitness', collocation_tr: 'Bir şeye tanık olmak, önemli/kilit görgü tanığı' },
+            { headword: 'Wound', translation: 'Yara, Yaralamak', verb: 'wound', noun: 'wound', adjective: '', adverb: '', collocation: 'to wound badly, bad/deep/serious wound', collocation_tr: 'Kötü bir şekilde yaralamak, kötü/derin/ciddi yara' }
+        ];
+
+        const wordListContainer = document.getElementById('word-list');
+        const themeToggle = document.getElementById('theme-toggle');
+        const searchBar = document.getElementById('search-bar');
+        
+        function populateWords(data) {
+            wordListContainer.innerHTML = '';
+            if (data.length === 0) {
+                wordListContainer.innerHTML = `<p class="text-center text-gray-500 my-10">Aranan kelime bulunamadı.</p>`;
+                return;
+            }
+            data.forEach(item => {
+                if (!item.headword) return;
+                const entryDiv = document.createElement('div');
+                entryDiv.className = 'word-entry p-3 rounded-lg shadow-sm';
+                let formsHtml = '';
+                if (item.verb) formsHtml += `<p class="text-xs"><strong>VERB (FİİL):</strong> <span>${item.verb}</span></p>`;
+                if (item.noun) formsHtml += `<p class="text-xs"><strong>NOUN (İSİM):</strong> <span>${item.noun}</span></p>`;
+                if (item.adjective) formsHtml += `<p class="text-xs"><strong>ADJECTIVE (SIFAT):</strong> <span>${item.adjective}</span></p>`;
+                if (item.adverb) formsHtml += `<p class="text-xs"><strong>ADVERB (ZARF):</strong> <span>${item.adverb}</span></p>`;
+                
+                let speakableWord = item.headword.split(/[\s/(]+/)[0].trim();
+
+                let content = `
+                    <div class="headword-container">
+                        <h2 class="headword text-xl">${item.headword} <span class="text-lg text-blue-500 font-normal">(${item.translation})</span></h2>
+                        <button class="speak-btn" data-word="${speakableWord}" aria-label="Telaffuz et">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"></path></svg>
+                            <span>telaffuz</span>
+                        </button>
+                    </div>
+                `;
+                
+                if (formsHtml) {
+                    content += `<div class="word-forms mt-2 p-2 rounded-md">${formsHtml}</div>`;
+                }
+                if (item.collocation && item.collocation.trim() !== '') {
+                    content += `
+                        <div class="collocation-box mt-2 p-2 rounded-md">
+                            <p class="text-sm"><strong>Örnek Kullanım:</strong> "${item.collocation}"</p>
+                            <p class="explanation mt-1 text-sm"><strong>Açıklama:</strong> ${item.collocation_tr}</p>
+                        </div>
+                    `;
+                }
+                entryDiv.innerHTML = content;
+                wordListContainer.appendChild(entryDiv);
+            });
+        }
+        
+        let currentAudio; 
+
+        async function playPronunciation(word, buttonElement) {
+            if (currentAudio) {
+                currentAudio.pause(); 
+            }
+            buttonElement.classList.add('loading');
+            
+            try {
+                const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+                if (!response.ok) {
+                    buttonElement.classList.add('hidden');
+                    return;
+                }
+                
+                const data = await response.json();
+                const phonetics = data[0]?.phonetics || [];
+                const audioData = phonetics.find(p => p.audio);
+                
+                if (audioData && audioData.audio) {
+                    currentAudio = new Audio(audioData.audio);
+                    currentAudio.play();
+                } else {
+                    buttonElement.classList.add('hidden');
+                }
+            } catch (error) {
+                console.error('Telaffuz hatası:', error);
+                buttonElement.classList.add('hidden');
+            } finally {
+                setTimeout(() => buttonElement.classList.remove('loading'), 500);
+            }
+        }
+
+
+        wordListContainer.addEventListener('click', function(event) {
+            const speakButton = event.target.closest('.speak-btn');
+            if (speakButton && !speakButton.classList.contains('loading')) {
+                const wordToSpeak = speakButton.dataset.word;
+                playPronunciation(wordToSpeak, speakButton);
+            }
+        });
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        themeToggle.addEventListener('change', switchTheme, false);
+
+        function handleSearch() {
+            const searchTerm = searchBar.value.toLowerCase();
+            const filteredWords = wordData.filter(word => 
+                word.headword.toLowerCase().startsWith(searchTerm)
+            );
+            populateWords(filteredWords);
+        }
+
+        searchBar.addEventListener('input', handleSearch);
+
+        // Yıl bilgisini dinamik olarak ekle
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Sayfa yüklendiğinde temayı ayarla (varsayılan dark)
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'light') {
+            document.documentElement.classList.remove('dark');
+            themeToggle.checked = false;
+        } else {
+            document.documentElement.classList.add('dark');
+            themeToggle.checked = true;
+        }
+
+        populateWords(wordData);
+    </script>
+</body>
+</html>
